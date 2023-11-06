@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:35:27 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/06 16:44:44 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/06 17:37:06 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdbool.h>
-#define BUFFER_SIZE 64
 
 static t_map	*ft_generate_map(char *path, t_map *dst)
 {
@@ -31,7 +30,7 @@ static t_map	*ft_generate_map(char *path, t_map *dst)
 	dst->line_len = ft_strlen(line) - 1;
 	while (line != NULL)
 	{
-		dst->colon_len++;
+		dst->column_len++;
 		ptr = ft_strchr(line, '\n');
 		if (ptr != NULL)
 			*ptr = '\0';
@@ -49,7 +48,7 @@ static bool	ft_check_walls(t_map *map)
 
 	i = 0;
 	map->map_len = ft_strlen(map->map);
-	if (map->map_len != map->colon_len * map->line_len)
+	if (map->map_len != map->column_len * map->line_len)
 		return (NULL);
 	while (i < map->map_len)
 	{
@@ -59,38 +58,47 @@ static bool	ft_check_walls(t_map *map)
 			return (false);
 		if (i % map->line_len == map->line_len - 1 && map->map[i] != WALL)
 			return (false);
-		if (i > map->line_len * (map->colon_len - 1) && map->map[i] != WALL)
+		if (i > map->line_len * (map->column_len - 1) && map->map[i] != WALL)
 			return (false);
 		i++;
 	}
 	return (true);
 }
 
-static t_map	*ft_validate_map(t_map *map)
+static bool	ft_check_chars(t_map *map)
 {
 	size_t	i;
 
-	if (!ft_check_walls(map))
-		return (NULL);
 	i = 0;
 	while (i < map->map_len)
 	{
 		if (!ft_chrset(map->map[i], CHARSET))
-			return (NULL);
+			return (false);
 		if (map->map[i] == EXIT)
 		{
 			if (map->exit_index != -1)
-				return (NULL);
+				return (false);
 			map->exit_index = i;
 		}
 		if (map->map[i] == START)
 		{
 			if (map->start_index != -1)
-				return (NULL);
+				return (false);
 			map->start_index = i;
 		}
 		i++;
 	}
+	if (map->exit_index == -1 || map->start_index == -1)
+		return (false);
+	return (true);
+}
+
+static t_map	*ft_validate_map(t_map *map)
+{
+	if (!ft_check_walls(map))
+		return (NULL);
+	if (!ft_check_chars(map))
+		return (NULL);
 	return (map);
 }
 
@@ -110,12 +118,12 @@ t_map	*ft_parse_map(char *path)
 	return (new_map);
 }
 
-/* #include <stdio.h>
+#include <stdio.h>
 
 void	ft_print_map(t_map *map)
 {
 	printf("Map: %s\nl_len: %zu\nc_len: %zu\nstart_index: %d\nexit_index: %d", \
-			map->map, map->line_len, map->colon_len, map->start_index, map->exit_index);
+			map->map, map->line_len, map->column_len, map->start_index, map->exit_index);
 }
 
 int	main(int argc, char *argv[])
@@ -135,4 +143,3 @@ int	main(int argc, char *argv[])
 	free(map);
 	return (0);
 }
- */
