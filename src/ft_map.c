@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:35:27 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/06 18:00:25 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/06 18:03:17 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include <unistd.h>
 #include <stdbool.h>
 
-
-// TODO: Check for every line if they are the same length, keeping in mind the last line doesn't have a \n char
 static t_map	*ft_generate_map(char *path, t_map *dst)
 {
 	char	*line;
@@ -36,6 +34,8 @@ static t_map	*ft_generate_map(char *path, t_map *dst)
 		ptr = ft_strchr(line, '\n');
 		if (ptr != NULL)
 			*ptr = '\0';
+		if (ft_strlen(line) != dst->line_len)
+			return (free(line), NULL);
 		if (ft_put_and_remove(&(dst->map), line) == NULL)
 			return (free(line), NULL);
 		free(line);
