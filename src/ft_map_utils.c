@@ -6,28 +6,12 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 14:32:31 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/06 15:06:02 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/06 16:41:02 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_map.h"
 #include "../Libft/libft.h"
-
-int	ft_count_alnum(char *str, size_t len)
-{
-	int	i;
-	int	c;
-
-	i = 0;
-	c = 0;
-	while (str[i] != '\0' && i < len)
-	{
-		if (ft_isalnum(str[i]))
-			c++;
-		i++;
-	}
-	return (c);
-}
 
 char	*ft_put_and_remove(char **dst, char *src)
 {
@@ -62,4 +46,14 @@ t_map	*ft_init_map(t_map *map)
 	map->exit_index = -1;
 	map->start_index = -1;
 	return (map);
+}
+
+void	ft_map_error(t_error error, t_map *map)
+{
+	ft_print_error(error);
+	if (map->map != NULL)
+		free(map->map);
+	if (map != NULL)
+		free(map);
+	exit(1);
 }

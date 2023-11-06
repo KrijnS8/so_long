@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:35:27 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/06 15:05:56 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/06 16:44:44 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdbool.h>
 #define BUFFER_SIZE 64
 
-t_map	*ft_generate_map(char *path, t_map *dst)
+static t_map	*ft_generate_map(char *path, t_map *dst)
 {
 	char	*line;
 	int		fd;
@@ -43,9 +43,9 @@ t_map	*ft_generate_map(char *path, t_map *dst)
 	return (dst);
 }
 
-bool	ft_check_walls(t_map *map)
+static bool	ft_check_walls(t_map *map)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	map->map_len = ft_strlen(map->map);
@@ -66,9 +66,9 @@ bool	ft_check_walls(t_map *map)
 	return (true);
 }
 
-t_map	*ft_validate_map(t_map *map)
+static t_map	*ft_validate_map(t_map *map)
 {
-	int	i;
+	size_t	i;
 
 	if (!ft_check_walls(map))
 		return (NULL);
@@ -97,18 +97,16 @@ t_map	*ft_validate_map(t_map *map)
 t_map	*ft_parse_map(char *path)
 {
 	t_map	*new_map;
-	char	*line;
-	int		fd;
 
 	new_map = (t_map *) malloc(sizeof(t_map));
 	if (new_map == NULL)
-		return (NULL);
+		ft_map_error(ERR_MAP_INNIT_FAILURE, new_map);
 	if (ft_init_map(new_map) == NULL)
-		return (free(new_map), NULL);
+		ft_map_error(ERR_MAP_INNIT_FAILURE, new_map);
 	if (ft_generate_map(path, new_map) == NULL)
-		return (free(new_map), NULL);
+		ft_map_error(ERR_MAP_GENERATE_FAILURE, new_map);
 	if (ft_validate_map(new_map) == NULL)
-		return (free(new_map), NULL);
+		ft_map_error(ERR_MAP_VALIDATE_FAILURE, new_map);
 	return (new_map);
 }
 
