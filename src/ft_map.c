@@ -6,122 +6,135 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:35:27 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/01 16:52:49 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/06 15:05:56 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_map.h"
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdbool.h>
 #define BUFFER_SIZE 64
 
-static size_t	ft_map_size(char *path)
+t_map	*ft_generate_map(char *path, t_map *dst)
 {
+	char	*line;
 	int		fd;
-	char	buffer[BUFFER_SIZE + 1];
-	ssize_t	bytes_read;
-	size_t	size;
+	char	*ptr;
 
-	size = 0;
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		return (0);
-	bytes_read = read(fd, buffer, BUFFER_SIZE);
-	if (bytes_read < 0)
-		return (close(fd), 0);
-	buffer[BUFFER_SIZE] = '\0';
-	while (bytes_read > 0)
-	{
-		size += ft_count_alnum(buffer, bytes_read);
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		buffer[BUFFER_SIZE] = '\0';
-	}
-	if (bytes_read < 0)
-		return (close(fd), 0);
-	return (close(fd), size);
-}
-
-static t_map	ft_generate_map(int fd, size_t size)
-{
-	t_map	new_map;
-	char	*line;
-	int		i;
-	
-	ft_init_map(&new_map);
-	new_map.map = (char *)ft_calloc(size + 1, sizeof(char));
-	if (new_map.map == NULL)
-		return (new_map);
+		return (NULL);
 	line = ft_get_next_line(fd);
 	if (line == NULL)
-		return (free(new_map.map), new_map.map = NULL, new_map);
-	new_map.l_len = ft_strlen(line) - 1;
-	i = 1;
+		return (NULL);
+	dst->line_len = ft_strlen(line) - 1;
 	while (line != NULL)
 	{
-		// if (ft_strlen(line) -1 != new_map.l_len)
-		// 	return (free(new_map.map), free(line), new_map.map = NULL, new_map);
-		if(line[new_map.l_len] == '\n')
-			line[new_map.l_len] = '\0';
-		ft_strlcat(new_map.map, line, new_map.l_len * i + ft_strlen(line));
+		dst->colon_len++;
+		ptr = ft_strchr(line, '\n');
+		if (ptr != NULL)
+			*ptr = '\0';
+		if (ft_put_and_remove(&(dst->map), line) == NULL)
+			return (free(line), NULL);
 		free(line);
 		line = ft_get_next_line(fd);
-		i++;
 	}
-	free(line);
-	return (new_map);
+	return (dst);
 }
 
-t_map	ft_parse_map(char *path)
+bool	ft_check_walls(t_map *map)
 {
-	t_map	new_map;
-	size_t	m_size;
-	int		fd;
-	int		i;
+	int	i;
 
-	m_size = ft_map_size(path);
-	if (m_size == 0)
-		return (new_map.map = NULL, new_map);
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (new_map.map = NULL, new_map);
-	new_map = ft_generate_map(fd, m_size);
-	if (new_map.map == NULL)
-		return (new_map);
 	i = 0;
-	while (new_map.map[i] != '\0')
+	map->map_len = ft_strlen(map->map);
+	if (map->map_len != map->colon_len * map->line_len)
+		return (NULL);
+	while (i < map->map_len)
 	{
-		if (new_map.map[i] == 'P')
+		if (i < map->line_len && map->map[i] != WALL)
+			return (false);
+		if (i % map->line_len == 0 && map->map[i] != WALL)
+			return (false);
+		if (i % map->line_len == map->line_len - 1 && map->map[i] != WALL)
+			return (false);
+		if (i > map->line_len * (map->colon_len - 1) && map->map[i] != WALL)
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+t_map	*ft_validate_map(t_map *map)
+{
+	int	i;
+
+	if (!ft_check_walls(map))
+		return (NULL);
+	i = 0;
+	while (i < map->map_len)
+	{
+		if (!ft_chrset(map->map[i], CHARSET))
+			return (NULL);
+		if (map->map[i] == EXIT)
 		{
-			if (new_map.start_index != -1)
-				return (close(fd), free(new_map.map), new_map.map = NULL, new_map);
-			new_map.start_index = i;
+			if (map->exit_index != -1)
+				return (NULL);
+			map->exit_index = i;
 		}
-		if (new_map.map[i] == 'E')
+		if (map->map[i] == START)
 		{
-			if (new_map.exit_index != -1)
-				return (close(fd), free(new_map.map), new_map.map = NULL, new_map);
-			new_map.exit_index = i;
+			if (map->start_index != -1)
+				return (NULL);
+			map->start_index = i;
 		}
 		i++;
 	}
-	close(fd);
+	return (map);
+}
+
+t_map	*ft_parse_map(char *path)
+{
+	t_map	*new_map;
+	char	*line;
+	int		fd;
+
+	new_map = (t_map *) malloc(sizeof(t_map));
+	if (new_map == NULL)
+		return (NULL);
+	if (ft_init_map(new_map) == NULL)
+		return (free(new_map), NULL);
+	if (ft_generate_map(path, new_map) == NULL)
+		return (free(new_map), NULL);
+	if (ft_validate_map(new_map) == NULL)
+		return (free(new_map), NULL);
 	return (new_map);
 }
 
-#include <stdio.h>
+/* #include <stdio.h>
 
-void	ft_print_map(t_map map)
+void	ft_print_map(t_map *map)
 {
-	printf("Map: %s\nl_len: %zu\nstart_index: %d\nexit_index: %d", map.map, map.l_len, map.start_index, map.exit_index);
+	printf("Map: %s\nl_len: %zu\nc_len: %zu\nstart_index: %d\nexit_index: %d", \
+			map->map, map->line_len, map->colon_len, map->start_index, map->exit_index);
 }
 
 int	main(int argc, char *argv[])
 {
 	if (argc < 2)
 		return (printf("error"), 0);
-	t_map map = ft_parse_map(argv[1]);
+	t_map *map = ft_parse_map(argv[1]);
 
+	if (map == NULL || map->map == NULL)
+	{
+		printf("Error");
+		return (0);
+	}
+		
 	ft_print_map(map);
-	free(map.map);
+	free(map->map);
+	free(map);
 	return (0);
 }
+ */
