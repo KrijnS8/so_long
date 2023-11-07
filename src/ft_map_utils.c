@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 14:32:31 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/06 17:36:56 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/07 13:12:23 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,10 @@ void	ft_map_error(t_error error, t_map *map)
 	if (map != NULL)
 		free(map);
 	exit(1);
+}
+
+void	ft_print_map(t_map *map)
+{
+	ft_printf("Map: %s\nl_len: %d\nc_len: %d\nstart_index: %d\nexit_index: %d", \
+			map->map, (int)map->line_len, (int)map->column_len, map->start_index, map->exit_index);
 }

@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:35:27 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/06 18:03:17 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/07 12:41:18 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,23 +118,4 @@ t_map	*ft_parse_map(char *path)
 	if (ft_validate_map(new_map) == NULL)
 		ft_map_error(ERR_MAP_VALIDATE_FAILURE, new_map);
 	return (new_map);
-}
-
-#include <stdio.h>
-
-void	ft_print_map(t_map *map)
-{
-	printf("Map: %s\nl_len: %zu\nc_len: %zu\nstart_index: %d\nexit_index: %d", \
-			map->map, map->line_len, map->column_len, map->start_index, map->exit_index);
-}
-
-int	main(int argc, char *argv[])
-{
-	if (argc < 2)
-		return (printf("error"), 0);
-	t_map *map = ft_parse_map(argv[1]);		
-	ft_print_map(map);
-	free(map->map);
-	free(map);
-	return (0);
 }
