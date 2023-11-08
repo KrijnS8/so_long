@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_error.c                                         :+:    :+:            */
+/*   error.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/06 16:22:07 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/06 17:06:57 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/08 17:32:38 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "../include/ft_error.h"
+#include "../include/error.h"
+#include "../include/system.h"
 #include "../Libft/libft.h"
 
 const char	*g_error_map[] = {
 [ERR_MAP_INNIT_FAILURE] = "An error occured while allocating memory",
 [ERR_MAP_GENERATE_FAILURE] = "An error occured while reading the .ber file!",
-[ERR_MAP_VALIDATE_FAILURE] = "An error occured while validating the .ber file!"
+[ERR_MAP_VALIDATE_FAILURE] = "An error occured while validating the .ber file!",
+[ERR_SYS_MALLOC_FAILURE] = "Malloc error",
+[ERR_IMG_TEXTURE_FAILURE] = "Failed to load texture"
 };
 
-void	ft_print_error(t_error error)
+void	print_error(t_error error)
 {
 	char	*error_msg;
 

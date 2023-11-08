@@ -6,43 +6,56 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 12:40:45 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/07 14:56:47 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/08 17:56:50 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Compile command: cc src/*.c Libft/*.c -Lmlx_linux -lmlx_Linux -lX11 -lXext
 
-#include "../include/ft_map.h"
+#include "../include/map.h"
 #include "../Libft/libft.h"
-#include "../include/ft_window.h"
+#include "../include/system.h"
+#include "../include/error.h"
+#include "../include/render.h"
+#include "../include/texture.h"
 #include "../mlx_linux/mlx.h"
-#define HEIGHT 400
-#define WIDTH 400
+
+t_sys	*init_program(char *path)
+{
+	t_sys	*data;
+	
+	data = (t_sys *)malloc(sizeof(t_sys));
+	if (data == NULL)
+		system_error(data, ERR_SYS_MALLOC_FAILURE);
+	init_system(data);
+	data->mlx_ptr = mlx_init();
+	if (data->mlx_ptr == NULL)
+		system_error(data, ERR_SYS_MALLOC_FAILURE);
+	data->map = parse_map(path);
+	if (data->map == NULL)
+		system_error(data, ERR_MAP_GENERATE_FAILURE);
+	data->mlx_win = mlx_new_window(data->mlx_ptr, data->map->line_len*32, data->map->column_len*32, PROGRAM_NAME);
+	if (data->mlx_win == NULL)
+		system_error(data, ERR_SYS_MALLOC_FAILURE);
+	load_textures(data);
+	return (data);
+}
 
 int	main(int argc, char *argv[])
 {
-	t_mlx	mlx_data;
+	t_sys	*system;
 
-	mlx_data.mlx_ptr = mlx_init();
-	if (mlx_data.mlx_ptr == NULL)
-		return (1);
-	mlx_data.mlx_win = mlx_new_window(mlx_data.mlx_ptr, WIDTH, HEIGHT, "Program");
-	if (mlx_data.mlx_win == NULL)
-	{
-		mlx_destroy_display(mlx_data.mlx_ptr);
-		free(mlx_data.mlx_ptr);
-		return (1);
-	}
-	mlx_hook(mlx_data.mlx_win, ON_KEYDOWN, KEY_PRESS_MASK, ft_handle_input, &mlx_data);
-	mlx_loop(mlx_data.mlx_ptr);
-	mlx_destroy_window(mlx_data.mlx_ptr, mlx_data.mlx_win);
-	mlx_destroy_display(mlx_data.mlx_ptr);
-	free(mlx_data.mlx_ptr);
+	system = init_program(argv[1]);
+	mlx_hook(system->mlx_win, ON_KEYDOWN, KEY_PRESS_MASK, handle_input, system);
+	mlx_hook(system->mlx_win, ON_DESTROY, NO_EVENT_MASK, destroy_system, system);
+	mlx_loop_hook(system->mlx_ptr, handle_render, system);
+	mlx_loop(system->mlx_ptr);
+	destroy_system(system);
 	return (0);
 	/* if (argc < 2)
 		return (ft_printf("error"), 0);
-	t_map *map = ft_parse_map(argv[1]);		
-	ft_print_map(map);
+	t_map *map = parse_map(argv[1]);		
+	print_map(map);
 	free(map->map);
 	free(map);
 	return (0); */

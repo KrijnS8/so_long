@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_map.h                                           :+:    :+:            */
+/*   map.h                                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:37:10 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/06 17:36:50 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/08 15:38:19 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MAP_H
-# define FT_MAP_H
+#ifndef MAP_H
+# define MAP_H
 # include <stdlib.h>
 # include "../Libft/libft.h"
-# include "../include/ft_error.h"
+# include "error.h"
 # define EMPTY_SPACE '0'
 # define WALL '1'
 # define COLLECTIBLE 'C'
@@ -31,11 +31,11 @@ typedef struct s_map {
 	int		exit_index;
 } t_map;
 
-extern t_map	*ft_parse_map(char *path);
-extern t_map	*ft_init_map(t_map *map);
-extern char		*ft_put_and_remove(char **dst, char *src);
-extern int		ft_chrset(char c, const char *set);
-extern void		ft_print_map(t_map *map);
-extern void		ft_map_error(t_error error, t_map *map);
+extern t_map	*parse_map(char *path);
+extern t_map	*init_map(t_map *map);
+extern char		*put_and_remove(char **dst, char *src);
+extern int		chrset(char c, const char *set);
+extern void		print_map(t_map *map);
+extern void		map_error(t_error error, t_map *map);
 
 #endif

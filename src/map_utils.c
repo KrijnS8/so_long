@@ -6,14 +6,14 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 14:32:31 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/07 13:12:23 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/08 14:02:05 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_map.h"
+#include "../include/map.h"
 #include "../Libft/libft.h"
 
-char	*ft_put_and_remove(char **dst, char *src)
+char	*put_and_remove(char **dst, char *src)
 {
 	char	*tmp;
 
@@ -31,12 +31,12 @@ char	*ft_put_and_remove(char **dst, char *src)
 	return (tmp);
 }
 
-int	ft_chrset(char c, const char *set)
+int	chrset(char c, const char *set)
 {
 	return (ft_strchr(set, c) != NULL);
 }
 
-t_map	*ft_init_map(t_map *map)
+t_map	*init_map(t_map *map)
 {
 	map->map = (char *)ft_calloc(1, sizeof(char));
 	if (map->map == NULL)
@@ -48,9 +48,9 @@ t_map	*ft_init_map(t_map *map)
 	return (map);
 }
 
-void	ft_map_error(t_error error, t_map *map)
+void	map_error(t_error error, t_map *map)
 {
-	ft_print_error(error);
+	print_error(error);
 	if (map->map != NULL)
 		free(map->map);
 	if (map != NULL)
@@ -58,7 +58,7 @@ void	ft_map_error(t_error error, t_map *map)
 	exit(1);
 }
 
-void	ft_print_map(t_map *map)
+void	print_map(t_map *map)
 {
 	ft_printf("Map: %s\nl_len: %d\nc_len: %d\nstart_index: %d\nexit_index: %d", \
 			map->map, (int)map->line_len, (int)map->column_len, map->start_index, map->exit_index);

@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_window.h                                        :+:    :+:            */
+/*   system.h                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 13:59:25 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/07 14:31:57 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/08 17:11:23 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
-#include <X11/keysym.h>
+#ifndef SYSTEM_H
+# define SYSTEM_H
+# include <X11/keysym.h>
+# include "map.h"
+
+# define PROGRAM_NAME "so_long"
 
 # define ON_KEYDOWN 2
 # define ON_KEYUP 3
@@ -49,12 +52,30 @@
 # define COLORMAP_CHANGE_MASK 1L<<23
 # define OWNER_GRAB_BUTTON_MASK 1L<<24
 
-typedef struct s_mlx
+typedef struct s_img
+{
+	void	*texture;
+	int		width;
+	int		height;
+}	t_img;
+
+
+typedef struct s_sys
 {
 	void	*mlx_ptr;
 	void	*mlx_win;
-}	t_mlx;
+	t_map	*map;
+	t_img	*player;
+	t_img	*collectible;
+	t_img	*wall;
+	t_img	*floor;
+	t_img	*exit;
+	
+}	t_sys;
 
-int	ft_handle_input(int keysym, t_mlx *data);
+void	init_system(t_sys	*data);
+int 	destroy_system(t_sys *data);
+void	system_error(t_sys *data, t_error error);
+int		handle_input(int keysym, t_sys *data);
 
 #endif
