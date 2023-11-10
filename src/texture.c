@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/08 17:29:18 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/10 11:28:37 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/10 13:34:30 by krijn         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_img	*create_img(t_sys *data, char *path)
 		free(img);
 		system_error(data, ERR_IMG_TEXTURE_FAILURE);
 	}
-	upscale_img(data, img, 2);
+	upscale_img(data, img, TEXTURE_FACTOR);
 	return (img);
 }
 

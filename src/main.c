@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 12:40:45 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/10 11:26:52 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/10 13:35:20 by krijn         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ t_sys	*init_program(char *path)
 	data->map = parse_map(path);
 	if (data->map == NULL)
 		system_error(data, ERR_MAP_GENERATE_FAILURE);
-	data->mlx_win = mlx_new_window(data->mlx_ptr, data->map->line_len*32, data->map->column_len*32, PROGRAM_NAME);
+	data->mlx_win = mlx_new_window(data->mlx_ptr, data->map->line_len*(16 * TEXTURE_FACTOR), \
+									data->map->column_len*(16 * TEXTURE_FACTOR), PROGRAM_NAME);
 	if (data->mlx_win == NULL)
 		system_error(data, ERR_SYS_MALLOC_FAILURE);
 	load_textures(data);

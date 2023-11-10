@@ -6,7 +6,7 @@
 /*   By: krijn <krijn@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/10 11:28:03 by krijn         #+#    #+#                 */
-/*   Updated: 2023/11/10 11:56:12 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/10 13:20:17 by krijn         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ void	upscale_img(t_sys *data, t_img *img, int factor)
 		system_error(data, ERR_SYS_MALLOC_FAILURE);
 	original_data = get_img_data(img->texture);
 	upscaled_data = get_img_data(new_texture);
+    if (original_data == NULL || upscaled_data == NULL)
+    {
+        mlx_destroy_image(data->mlx_ptr, new_texture);
+        system_error(data, ERR_SYS_MALLOC_FAILURE);
+    }
 	update_pixels(original_data, upscaled_data, new_width, new_height, factor);
 	mlx_destroy_image(data->mlx_ptr, img->texture);
 	img->texture = new_texture;
