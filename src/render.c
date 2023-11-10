@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/08 16:39:49 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/08 17:38:29 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/10 11:45:28 by krijn         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,26 @@
 
 int	handle_render(t_sys *system)
 {
-	mlx_string_put(system->mlx_ptr, system->mlx_win, 100, 100, 0xff0000, "Hello World");
+	int 	y;
+	int		x;
+    int     size;
+	t_map	*map;
+
+	map = system->map;
+	y = 0;
+    size = system->wall->width;
+    while (y < map->column_len)
+    {
+        x = 0;
+        while (x < map->line_len)
+	    {
+            if (map->map[y * map->line_len + x] == '1')
+                mlx_put_image_to_window(system->mlx_ptr, system->mlx_win, system->wall->texture, x * size, y * size);
+            else
+                mlx_put_image_to_window(system->mlx_ptr, system->mlx_win, system->floor->texture, x * size, y * size);
+            x++;
+	    }
+        y++;
+    }
 	return (0);
 }
