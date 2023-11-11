@@ -12,7 +12,7 @@ static char *result[] = {
 "# c #FACB3E",
 "$ c #72D6CE",
 "% c #FDF7ED",
-"& c None",
+"& c #000000",
 /* pixels */
 "&&  &&&&&&&&  &&",
 "  O.        .O  ",

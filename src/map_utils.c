@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_map_utils.c                                     :+:    :+:            */
+/*   map_utils.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 14:32:31 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/08 14:02:05 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/11 13:12:09 by krijn         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ t_map	*init_map(t_map *map)
 	map->column_len = 0;
 	map->exit_index = -1;
 	map->start_index = -1;
+	map->coll_arr = NULL;
+	map->coll_count = 0;
 	return (map);
 }
 
@@ -53,6 +55,8 @@ void	map_error(t_error error, t_map *map)
 	print_error(error);
 	if (map->map != NULL)
 		free(map->map);
+	if (map->coll_arr != NULL)
+		free(map->coll_arr);
 	if (map != NULL)
 		free(map);
 	exit(1);

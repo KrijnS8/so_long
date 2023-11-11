@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 13:59:25 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/08 17:11:23 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/11 13:28:06 by krijn         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,29 @@ typedef struct s_img
 	int		height;
 }	t_img;
 
+typedef struct s_player
+{
+	int	x;
+	int	y;
+	int	step_count;
+}	t_player;
 
 typedef struct s_sys
 {
-	void	*mlx_ptr;
-	void	*mlx_win;
-	t_map	*map;
-	t_img	*player;
-	t_img	*collectible;
-	t_img	*wall;
-	t_img	*floor;
-	t_img	*exit;
+	void		*mlx_ptr;
+	void		*mlx_win;
+	t_player	*player_data;
+	t_map		*map;
+	t_img		*player;
+	t_img		*collectible;
+	t_img		*wall;
+	t_img		*floor;
+	t_img		*exit;
 	
 }	t_sys;
 
 void	init_system(t_sys	*data);
+void	init_player(t_sys *data);
 int 	destroy_system(t_sys *data);
 void	system_error(t_sys *data, t_error error);
 int		handle_input(int keysym, t_sys *data);

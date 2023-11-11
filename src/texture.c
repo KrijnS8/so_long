@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/08 17:29:18 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/10 13:34:30 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/11 14:39:46 by krijn         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_img	*create_img(t_sys *data, char *path)
 		free(img);
 		system_error(data, ERR_IMG_TEXTURE_FAILURE);
 	}
+	update_transparency(data, img);
 	upscale_img(data, img, TEXTURE_FACTOR);
 	return (img);
 }
@@ -52,9 +53,9 @@ void	destroy_textures(t_sys *data)
 
 void	load_textures(t_sys *data)
 {
-	data->player = create_img(data, "resources/player.xpm");
-	data->collectible = create_img(data, "resources/collectible.xpm");
-	data->floor = create_img(data, "resources/floor.xpm");
-	data->wall = create_img(data, "resources/wall.xpm");
-	data->exit = create_img(data, "resources/exit.xpm");
+	data->player = create_img(data, "resources/xpm/player.xpm");
+	data->collectible = create_img(data, "resources/xpm/collectible.xpm");
+	data->floor = create_img(data, "resources/xpm/floor.xpm");
+	data->wall = create_img(data, "resources/xpm/wall.xpm");
+	data->exit = create_img(data, "resources/xpm/exit.xpm");
 }

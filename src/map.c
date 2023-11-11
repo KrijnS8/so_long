@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:35:27 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/08 17:11:57 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/11 13:10:50 by krijn         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,12 @@ static bool	check_chars(t_map *map)
 			if (map->start_index != -1)
 				return (false);
 			map->start_index = i;
+		}
+		if (map->map[i] == COLLECTIBLE)
+		{
+			map->coll_count++;
+			map->coll_arr = realloc(map->coll_arr, map->coll_count);
+			map->coll_arr[map->coll_count - 1] = i;
 		}
 		i++;
 	}

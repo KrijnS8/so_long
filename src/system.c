@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 14:16:11 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/10 13:37:27 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/11 13:46:40 by krijn         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,23 @@ void	init_system(t_sys	*data)
 {
 	data->mlx_ptr = NULL;
 	data->mlx_win = NULL;
+	data->player_data = NULL;
 	data->map = NULL;
 	data->player = NULL;
 	data->collectible = NULL;
 	data->floor = NULL;
 	data->wall = NULL;
 	data->exit = NULL;
+}
+
+void	init_player(t_sys *data)
+{
+	data->player_data = (t_player *)malloc(sizeof(t_player));
+	if (data->player_data == NULL)
+		system_error(data, ERR_SYS_MALLOC_FAILURE);
+	data->player_data->x = data->map->start_index % data->map->line_len;
+	data->player_data->y = data->map->start_index / data->map->line_len;
+	data->player_data->step_count = 0;
 }
 
 int destroy_system(t_sys *data)
@@ -45,6 +56,8 @@ int destroy_system(t_sys *data)
 			free(data->map->map);
 		free(data->map);
 	}
+	if (data->player_data != NULL)
+		free(data->player_data);
 	free(data);
 	exit(1);
 	return (0);
@@ -61,6 +74,23 @@ int	handle_input(int keysym, t_sys *data)
 	if (keysym == XK_Escape)
 	{
 		destroy_system(data);
+	}
+	if (keysym == 119)
+	{
+		printf("test");
+		data->player_data->y--;
+	}
+	if (keysym == 97)
+	{
+		data->player_data->x--;
+	}
+	if (keysym == 115)
+	{
+		data->player_data->y++;
+	}
+	if (keysym == 100)
+	{
+		data->player_data->x++;
 	}
 	ft_printf("%d\n", keysym);
 	return (0);

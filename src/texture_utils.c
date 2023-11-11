@@ -6,7 +6,7 @@
 /*   By: krijn <krijn@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/10 11:28:03 by krijn         #+#    #+#                 */
-/*   Updated: 2023/11/10 13:20:17 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/11 18:51:49 by krijn         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	update_pixels(char *original_data, char *upscaled_data, int new_widt
 	}
 }
 
-static char	*get_img_data(void *texture)
+static char	*get_char_img_data(void *texture)
 {
 	int	    bits_per_pixel;
 	int	    size_line;
@@ -48,6 +48,17 @@ static char	*get_img_data(void *texture)
 	char	*data;
 
 	data = mlx_get_data_addr(texture, &bits_per_pixel, &size_line, &endian);
+	return (data);
+}
+
+static unsigned int	*get_ui_img_data(void *texture)
+{
+	int	    		bits_per_pixel;
+	int	    		size_line;
+	int     		endian;
+	unsigned int	*data;
+
+	data = (unsigned int *)mlx_get_data_addr(texture, &bits_per_pixel, &size_line, &endian);
 	return (data);
 }
 
@@ -64,8 +75,8 @@ void	upscale_img(t_sys *data, t_img *img, int factor)
 	new_texture = mlx_new_image(data->mlx_ptr, new_width, new_height);
 	if (new_texture == NULL)
 		system_error(data, ERR_SYS_MALLOC_FAILURE);
-	original_data = get_img_data(img->texture);
-	upscaled_data = get_img_data(new_texture);
+	original_data = get_char_img_data(img->texture);
+	upscaled_data = get_char_img_data(new_texture);
     if (original_data == NULL || upscaled_data == NULL)
     {
         mlx_destroy_image(data->mlx_ptr, new_texture);
@@ -76,4 +87,28 @@ void	upscale_img(t_sys *data, t_img *img, int factor)
 	img->texture = new_texture;
 	img->width = new_width;
 	img->height = new_height;
+}
+
+// TODO: make own renderfunction that only prints non transparent pixels
+void	update_transparency(t_sys *data, t_img *img)
+{
+	unsigned int	*img_data;
+	int				i;
+	unsigned int	color;
+	unsigned int	r;
+	unsigned int	g;
+	unsigned int	b;
+
+	img_data = get_ui_img_data(img->texture);
+	i = 0;
+	while (i < img->width * img->height)
+	{
+		color = img_data[i];
+		r = (color >> 16) & 0xFF;
+		g = (color >> 8) & 0xFF;
+		b = color & 0xFF;
+		if (r == 0 && g == 0 && b == 0)
+			img_data[i] &= 0x00FFFFFF;
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:37:10 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/08 15:38:19 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/11 13:08:25 by krijn         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct s_map {
 	size_t	column_len;
 	int		start_index;
 	int		exit_index;
+	int		*coll_arr;
+	int		coll_count;
 } t_map;
 
 extern t_map	*parse_map(char *path);

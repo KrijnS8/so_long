@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/08 17:29:33 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/10 14:31:57 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/11 14:39:32 by krijn         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 # define TEXTURE_H
 # include "system.h"
 # ifndef TEXTURE_FACTOR
-#  define TEXTURE_FACTOR 10
+#  define TEXTURE_FACTOR 4
 # endif
 
 void	load_textures(t_sys *data);
 void	destroy_textures(t_sys *data);
 void	upscale_img(t_sys *data, t_img *img, int factor);
+void	update_transparency(t_sys *data, t_img *img);
 
 #endif
