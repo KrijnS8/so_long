@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/08 16:39:49 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/12 14:53:13 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/12 20:39:18 by krijn         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,7 @@
 #include "../include/texture.h"
 #include "../mlx_linux/mlx.h"
 
-int in_int_arr(int *arr, size_t size, int to_find)
-{
-    int i;
-
-    i = 0;
-    while (i < size)
-    {
-        if (arr[i] == to_find)
-            return (1);
-    }
-    return (0);
-}
-
-int transparent_render(t_sys *data, t_img *img, int x, int y)
+/* int transparent_render(t_sys *data, t_img *img, int x, int y)
 {
     unsigned int    *img_data;
     int             img_x;
@@ -54,9 +41,97 @@ int transparent_render(t_sys *data, t_img *img, int x, int y)
         }
         img_y++;
     }
+} */
+
+unsigned int    get_pixel_color(t_img *img, int x, int y)
+{
+    // unsigned int *data = (unsigned int *)img->addr;
+    return (*(unsigned int *)((img->addr + (y * img->size_line) + (x * img->bpp / 8))));
 }
 
-int render_player(t_sys *data)
+void    put_pixel_to_img(t_img *img, int x, int y, int color)
+{
+    unsigned int    *dst;
+
+    if (color == (int)0x00000000)
+		return ;
+
+    if (x >= 0 && y >= 0 && x < img->width && y < img->height)
+    {
+        dst = img->addr + (y * img->size_line + x * (img->bpp / 8));
+        *(unsigned int *)dst = color;
+    }
+}
+
+void    put_img_to_img(t_img *dst, t_img *src, int x, int y)
+{
+    int dy;
+    int dx;
+
+    dy = 0;
+    while(dy < src->height)
+    {
+        dx = 0;
+        while (dx < src->width)
+        {
+            put_pixel_to_img(dst, x + dx, y + dy, get_pixel_color(src, dx, dy));
+            dx++;
+        }
+        dy++;
+    }
+}
+
+void    render_background(t_sys *data, t_img *buf)
+{
+    int     y;
+    int     x;
+    int     size;
+    t_map   *map;
+    
+    map = data->map;
+    y = 0;
+    size = data->wall->width;
+    while (y < map->column_len)
+    {
+        x = 0;
+        while (x < map->line_len)
+        {
+            if (map->map[y * map->line_len + x] == WALL)
+                put_img_to_img(buf, data->wall, x * size, y * size);
+            else if (map->map[y * map->line_len + x] == EXIT)
+                put_img_to_img(buf, data->exit, x * size, y * size);
+            else
+                put_img_to_img(buf, data->floor, x * size, y * size);
+            x++;
+        }
+        y++;
+    }
+}
+
+void    draw_background(t_sys *data, t_img *buf)
+{
+    put_img_to_img(buf, data->background, 0, 0);
+}
+
+void    draw_objectives(t_sys *data, t_img *buf)
+{
+    int x;
+    int y;
+    int i;
+    int size;
+    
+    size = data->collectible->width;
+    i = 0;
+    while (i < data->map->coll_count)
+    {
+        x = data->map->coll_arr[i] % data->map->line_len;
+        y = data->map->coll_arr[i] / data->map->line_len;
+        put_img_to_img(buf, data->collectible, x * size, y * size);
+        i++;
+    }
+}
+
+void    draw_player(t_sys *data, t_img *buf)
 {
     int x;
     int y;
@@ -64,11 +139,34 @@ int render_player(t_sys *data)
 
     x = data->player_data->x;
     y = data->player_data->y;
-    size = data->wall->width;
-    mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->player->texture, x * size, (y - 0.5) * size);
+    size = data->player->width;
+    put_img_to_img(buf, data->player, x * size, (y - 0.5) * size);
 }
 
-int	handle_render(t_sys *system)
+// TODO: render background once and save inside of t_sys for improved performance
+int handle_render(t_sys *data)
+{
+    t_img   *buf;
+
+    buf = (t_img *)malloc(sizeof(t_img));
+    if (buf == NULL)
+        system_error(data, ERR_SYS_MALLOC_FAILURE);
+    buf->width = data->map->line_len * (16 * TEXTURE_FACTOR);
+    buf->height = data->map->column_len * (16 * TEXTURE_FACTOR);
+    buf->texture = mlx_new_image(data->mlx_ptr, buf->width, buf->height);
+    if (buf->texture == NULL)
+        system_error(data, ERR_SYS_MALLOC_FAILURE);
+    buf->addr = mlx_get_data_addr(buf->texture, &buf->bpp, &buf->size_line, &buf->endian);
+    draw_background(data, buf);
+    //mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->background->texture, 0, 0);
+    draw_objectives(data, buf);
+    draw_player(data, buf);
+    mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, buf->texture, 0, 0);
+    mlx_destroy_image(data->mlx_ptr, buf->texture);
+    free(buf);
+}
+
+/* int	handle_render(t_sys *system)
 {
 	int 	y;
 	int		x;
@@ -99,4 +197,4 @@ int	handle_render(t_sys *system)
         y++;
     }
 	return (0);
-}
+} */

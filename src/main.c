@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 12:40:45 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/11 14:04:03 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/12 19:44:26 by krijn         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int argc, char *argv[])
 {
 	t_sys	*system;
 
-	system = init_program(argv[1]);
+	system = init_program("map.ber");
 	mlx_hook(system->mlx_win, ON_KEYDOWN, KEY_PRESS_MASK, handle_input, system);
 	mlx_hook(system->mlx_win, ON_DESTROY, NO_EVENT_MASK, destroy_system, system);
 	mlx_loop_hook(system->mlx_ptr, handle_render, system);

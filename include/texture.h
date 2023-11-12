@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/08 17:29:33 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/12 11:49:23 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/12 15:29:24 by krijn         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void			load_textures(t_sys *data);
 void			destroy_textures(t_sys *data);
 void			upscale_img(t_sys *data, t_img *img, int factor);
 void			update_transparency(t_sys *data, t_img *img);
-unsigned int	*get_ui_img_data(void *texture);
+unsigned int	*get_ui_img_data(t_img *img);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 13:59:25 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/11 13:28:06 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/12 18:26:24 by krijn         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@
 typedef struct s_img
 {
 	void	*texture;
+	void	*addr;
+	int		bpp;
+	int		size_line;
+	int		endian;
 	int		width;
 	int		height;
 }	t_img;
@@ -77,6 +81,7 @@ typedef struct s_sys
 	t_img		*wall;
 	t_img		*floor;
 	t_img		*exit;
+	t_img		*background;
 	
 }	t_sys;
 

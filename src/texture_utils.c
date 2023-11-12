@@ -6,7 +6,7 @@
 /*   By: krijn <krijn@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/10 11:28:03 by krijn         #+#    #+#                 */
-/*   Updated: 2023/11/12 11:49:09 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/12 16:08:56 by krijn         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,6 @@ static char	*get_char_img_data(void *texture)
 	return (data);
 }
 
-unsigned int	*get_ui_img_data(void *texture)
-{
-	int	    		bits_per_pixel;
-	int	    		size_line;
-	int     		endian;
-	unsigned int	*data;
-
-	data = (unsigned int *)mlx_get_data_addr(texture, &bits_per_pixel, &size_line, &endian);
-	return (data);
-}
-
 void	upscale_img(t_sys *data, t_img *img, int factor)
 {
 	int		new_width;
@@ -87,28 +76,4 @@ void	upscale_img(t_sys *data, t_img *img, int factor)
 	img->texture = new_texture;
 	img->width = new_width;
 	img->height = new_height;
-}
-
-// TODO: make own renderfunction that only prints non transparent pixels
-void	update_transparency(t_sys *data, t_img *img)
-{
-	unsigned int	*img_data;
-	int				i;
-	unsigned int	color;
-	unsigned int	r;
-	unsigned int	g;
-	unsigned int	b;
-
-	img_data = get_ui_img_data(img->texture);
-	i = 0;
-	while (i < img->width * img->height)
-	{
-		color = img_data[i];
-		r = (color >> 16) & 0xFF;
-		g = (color >> 8) & 0xFF;
-		b = color & 0xFF;
-		if (r == 0 && g == 0 && b == 0)
-			img_data[i] &= 0x00FFFFFF;
-		i++;
-	}
 }
