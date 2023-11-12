@@ -6,7 +6,7 @@
 /*   By: krijn <krijn@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/10 11:28:03 by krijn         #+#    #+#                 */
-/*   Updated: 2023/11/11 18:51:49 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/12 11:49:09 by krijn         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char	*get_char_img_data(void *texture)
 	return (data);
 }
 
-static unsigned int	*get_ui_img_data(void *texture)
+unsigned int	*get_ui_img_data(void *texture)
 {
 	int	    		bits_per_pixel;
 	int	    		size_line;

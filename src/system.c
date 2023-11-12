@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 14:16:11 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/11 13:46:40 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/12 12:18:35 by krijn         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int destroy_system(t_sys *data)
 	{
 		if (data->map->map != NULL)
 			free(data->map->map);
+		if (data->map->coll_arr != NULL)
+			free(data->map->coll_arr);
 		free(data->map);
 	}
 	if (data->player_data != NULL)
@@ -77,21 +79,23 @@ int	handle_input(int keysym, t_sys *data)
 	}
 	if (keysym == 119)
 	{
-		printf("test");
-		data->player_data->y--;
+		if (data->map->map[(data->player_data->y - 1) * data->map->line_len + data->player_data->x] != WALL)
+			data->player_data->y--;
 	}
 	if (keysym == 97)
 	{
-		data->player_data->x--;
+		if (data->map->map[data->player_data->y * data->map->line_len + (data->player_data->x - 1)] != WALL)
+			data->player_data->x--;
 	}
 	if (keysym == 115)
 	{
-		data->player_data->y++;
+		if (data->map->map[(data->player_data->y + 1) * data->map->line_len + data->player_data->x] != WALL)
+			data->player_data->y++;
 	}
 	if (keysym == 100)
 	{
-		data->player_data->x++;
+		if (data->map->map[data->player_data->y * data->map->line_len + (data->player_data->x + 1)] != WALL)
+			data->player_data->x++;
 	}
-	ft_printf("%d\n", keysym);
 	return (0);
 }
