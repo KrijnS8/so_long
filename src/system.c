@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 14:16:11 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/12 12:18:35 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/13 14:46:55 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include "../Libft/libft.h"
 #include "../mlx_linux/mlx.h"
 #include "../include/texture.h"
+#include "../include/linked_list.h"
+#include "../include/collectible.h"
 #include <stdio.h>
 
 void	init_system(t_sys	*data)
@@ -28,6 +30,8 @@ void	init_system(t_sys	*data)
 	data->floor = NULL;
 	data->wall = NULL;
 	data->exit = NULL;
+	data->background = NULL;
+	data->frame_buf = NULL;
 }
 
 void	init_player(t_sys *data)
@@ -43,6 +47,7 @@ void	init_player(t_sys *data)
 int destroy_system(t_sys *data)
 {
 	destroy_textures(data);
+	destroy_frame_buffer(data);
 	if (data->mlx_win != NULL)
 		mlx_destroy_window(data->mlx_ptr, data->mlx_win);
 	if (data->mlx_ptr != NULL)
@@ -54,8 +59,7 @@ int destroy_system(t_sys *data)
 	{
 		if (data->map->map != NULL)
 			free(data->map->map);
-		if (data->map->coll_arr != NULL)
-			free(data->map->coll_arr);
+		lstclear(&data->map->coll_lst, free_collectible);
 		free(data->map);
 	}
 	if (data->player_data != NULL)

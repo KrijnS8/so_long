@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 13:59:25 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/12 18:26:24 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/13 12:28:49 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_sys
 	void		*mlx_ptr;
 	void		*mlx_win;
 	t_player	*player_data;
+	t_img		*frame_buf;
 	t_map		*map;
 	t_img		*player;
 	t_img		*collectible;
@@ -90,5 +91,7 @@ void	init_player(t_sys *data);
 int 	destroy_system(t_sys *data);
 void	system_error(t_sys *data, t_error error);
 int		handle_input(int keysym, t_sys *data);
+void	load_frame_buffer(t_sys *data);
+void	destroy_frame_buffer(t_sys *data);
 
 #endif

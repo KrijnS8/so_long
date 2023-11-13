@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   texture.h                                          :+:    :+:            */
+/*   collectible.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/11/08 17:29:33 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/13 12:06:50 by kschelvi      ########   odam.nl         */
+/*   Created: 2023/11/13 14:26:50 by kschelvi      #+#    #+#                 */
+/*   Updated: 2023/11/13 14:48:18 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEXTURE_H
-# define TEXTURE_H
-# include "system.h"
-# ifndef TEXTURE_FACTOR
-#  define TEXTURE_FACTOR 4
-# endif
+#include "../include/collectible.h"
+#include "../include/linked_list.h"
+#include <stdlib.h>
 
-void			load_textures(t_sys *data);
-void			destroy_textures(t_sys *data);
-void			upscale_img(t_sys *data, t_img *img, int factor);
-void			update_transparency(t_sys *data, t_img *img);
-unsigned int	*get_ui_img_data(t_img *img);
+t_collectible	*new_collectible(int x, int y)
+{
+	t_collectible	*new;
 
-#endif
+	new = (t_collectible *)malloc(sizeof(t_collectible));
+	if (new == NULL)
+		return (NULL);
+	new->x = x;
+	new->y = y;
+	new->show = 1;
+	return (new);
+}
+
+void	free_collectible(void *ptr)
+{
+	if (ptr != NULL)
+		free(ptr);
+}

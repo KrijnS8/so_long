@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 12:40:45 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/12 19:44:26 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/13 13:11:36 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_sys	*init_program(char *path)
 	if (data->mlx_win == NULL)
 		system_error(data, ERR_SYS_MALLOC_FAILURE);
 	load_textures(data);
+	load_frame_buffer(data);
 	return (data);
 }
 
@@ -47,7 +48,7 @@ int	main(int argc, char *argv[])
 {
 	t_sys	*system;
 
-	system = init_program("map.ber");
+	system = init_program(argv[1]);
 	mlx_hook(system->mlx_win, ON_KEYDOWN, KEY_PRESS_MASK, handle_input, system);
 	mlx_hook(system->mlx_win, ON_DESTROY, NO_EVENT_MASK, destroy_system, system);
 	mlx_loop_hook(system->mlx_ptr, handle_render, system);

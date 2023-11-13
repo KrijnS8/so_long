@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:37:10 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/11 13:08:25 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/13 14:30:34 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MAP_H
 # include <stdlib.h>
 # include "../Libft/libft.h"
+# include "linked_list.h"
 # include "error.h"
 # define EMPTY_SPACE '0'
 # define WALL '1'
@@ -29,7 +30,7 @@ typedef struct s_map {
 	size_t	column_len;
 	int		start_index;
 	int		exit_index;
-	int		*coll_arr;
+	t_lst	*coll_lst;
 	int		coll_count;
 } t_map;
 

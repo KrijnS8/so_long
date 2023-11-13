@@ -6,11 +6,12 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:35:27 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/12 20:45:59 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/13 14:36:27 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/map.h"
+#include "../include/collectible.h"
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdbool.h>
@@ -91,8 +92,7 @@ static bool	check_chars(t_map *map)
 		if (map->map[i] == COLLECTIBLE)
 		{
 			map->coll_count++;
-			map->coll_arr = (int *)ft_realloc(map->coll_arr, map->coll_count * sizeof(int));
-			map->coll_arr[map->coll_count - 1] = i;
+			lst_add_back(&map->coll_lst, lst_new(new_collectible(i % map->line_len, i / map->line_len)));
 		}
 		i++;
 	}

@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   texture.h                                          :+:    :+:            */
+/*   collectible.h                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/11/08 17:29:33 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/13 12:06:50 by kschelvi      ########   odam.nl         */
+/*   Created: 2023/11/13 13:32:10 by kschelvi      #+#    #+#                 */
+/*   Updated: 2023/11/13 14:48:28 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEXTURE_H
-# define TEXTURE_H
-# include "system.h"
-# ifndef TEXTURE_FACTOR
-#  define TEXTURE_FACTOR 4
-# endif
+#ifndef COLLECTIBLE_H
+# define COLLECTIBLE_H
 
-void			load_textures(t_sys *data);
-void			destroy_textures(t_sys *data);
-void			upscale_img(t_sys *data, t_img *img, int factor);
-void			update_transparency(t_sys *data, t_img *img);
-unsigned int	*get_ui_img_data(t_img *img);
+typedef struct	s_collectible {
+	int	x;
+	int	y;
+	int	show;
+}	t_collectible;
+
+t_collectible	*new_collectible(int x, int y);
+void			free_collectible(void *ptr);
 
 #endif
