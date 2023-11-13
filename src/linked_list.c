@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/13 13:44:02 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/13 14:38:53 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/13 16:37:24 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,29 @@ void	lst_add_back(t_lst **lst, t_lst *node)
 	last = lst_last(*lst);
 	last->next = node;
 	node->prev = last;
+}
+
+void	lst_del_node(t_lst **lst, t_lst	*node, void (*del)(void*))
+{
+	t_lst	*prev;
+	t_lst	*next;
+
+	prev = node->prev;
+	next = node->next;
+	if (prev == NULL)
+	{
+		if (next != NULL)
+			next->prev = NULL;
+		*lst = next;
+	}
+	else
+	{
+		prev->next = next;
+		if (next != NULL)
+			next->prev = prev;
+	}
+	del(node->content);
+	free(node);
 }
 
 void	lstclear(t_lst **lst, void (*del)(void*))

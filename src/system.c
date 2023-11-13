@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 14:16:11 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/13 14:46:55 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/13 15:03:55 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,24 +82,12 @@ int	handle_input(int keysym, t_sys *data)
 		destroy_system(data);
 	}
 	if (keysym == 119)
-	{
-		if (data->map->map[(data->player_data->y - 1) * data->map->line_len + data->player_data->x] != WALL)
-			data->player_data->y--;
-	}
+		move_player(data, 0, -1);
 	if (keysym == 97)
-	{
-		if (data->map->map[data->player_data->y * data->map->line_len + (data->player_data->x - 1)] != WALL)
-			data->player_data->x--;
-	}
+		move_player(data, -1, 0);
 	if (keysym == 115)
-	{
-		if (data->map->map[(data->player_data->y + 1) * data->map->line_len + data->player_data->x] != WALL)
-			data->player_data->y++;
-	}
+		move_player(data, 0, 1);
 	if (keysym == 100)
-	{
-		if (data->map->map[data->player_data->y * data->map->line_len + (data->player_data->x + 1)] != WALL)
-			data->player_data->x++;
-	}
+		move_player(data, 1, 0);
 	return (0);
 }

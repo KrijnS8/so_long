@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 13:59:25 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/13 12:28:49 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/13 15:02:54 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ void	system_error(t_sys *data, t_error error);
 int		handle_input(int keysym, t_sys *data);
 void	load_frame_buffer(t_sys *data);
 void	destroy_frame_buffer(t_sys *data);
+void    move_player(t_sys *data, int x, int y);
 
 #endif
