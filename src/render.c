@@ -143,7 +143,7 @@ void    draw_player(t_sys *data, t_img *buf)
     put_img_to_img(buf, data->player, x * size, (y - 0.5) * size);
 }
 
-// TODO: render background once and save inside of t_sys for improved performance
+// TODO: animation struct in linked list that updates every frame
 int handle_render(t_sys *data)
 {
     t_img   *buf;
