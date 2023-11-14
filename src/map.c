@@ -6,12 +6,11 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:35:27 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 12:13:31 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 13:12:14 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/map.h"
-#include "../include/collectible.h"
+#include "../include/so_long.h"
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdbool.h>

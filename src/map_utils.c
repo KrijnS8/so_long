@@ -6,13 +6,11 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 14:32:31 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 12:28:00 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 13:12:08 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/map.h"
-#include "../Libft/libft.h"
-#include "../include/collectible.h"
+#include "../include/so_long.h"
 #include <stdbool.h>
 
 char	*put_and_remove(char **dst, char *src)

@@ -6,13 +6,11 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/08 16:39:49 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 12:50:13 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 13:10:45 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/render.h"
-#include "../include/texture.h"
-#include "../include/collectible.h"
+#include "../include/so_long.h"
 #include "../mlx_linux/mlx.h"
 
 void	render_background(t_sys *data, t_img *buf)

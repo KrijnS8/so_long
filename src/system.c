@@ -6,17 +6,12 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 14:16:11 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 12:33:43 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 13:12:36 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/system.h"
-#include "../include/map.h"
-#include "../Libft/libft.h"
+#include "../include/so_long.h"
 #include "../mlx_linux/mlx.h"
-#include "../include/texture.h"
-#include "../include/linked_list.h"
-#include "../include/collectible.h"
 #include <stdio.h>
 
 void	init_system(t_sys	*data)

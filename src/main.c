@@ -6,18 +6,13 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 12:40:45 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 12:57:42 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 13:12:01 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Compile command: cc src/*.c Libft/*.c -Lmlx_linux -lmlx_Linux -lX11 -lXext
 
-#include "../include/map.h"
-#include "../Libft/libft.h"
-#include "../include/system.h"
-#include "../include/error.h"
-#include "../include/render.h"
-#include "../include/texture.h"
+#include "../include/so_long.h"
 #include "../mlx_linux/mlx.h"
 
 t_sys	*init_program(char *path)

@@ -6,13 +6,11 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/13 14:26:50 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 12:49:38 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 13:08:40 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/collectible.h"
-#include "../include/system.h"
-#include "../include/linked_list.h"
+#include "../include/so_long.h"
 #include <stdlib.h>
 
 t_collectible	*new_collectible(int x, int y)
