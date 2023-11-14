@@ -6,11 +6,12 @@
 #    By: kschelvi <kschelvi@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/11/01 13:23:25 by kschelvi      #+#    #+#                  #
-#    Updated: 2023/11/14 14:43:28 by kschelvi      ########   odam.nl          #
+#    Updated: 2023/11/14 16:13:36 by kschelvi      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
+NAME_BONUS = so_long_bonus
 
 CFLAGS = -Wall -Wextra -Werror
 MLXFLAGS = -Lminilibx-linux -lmlx_Linux -lXext -lX11
@@ -37,12 +38,32 @@ SRC	=	src/collectible.c \
 		src/texture_utils.c \
 		src/texture.c
 
+SRC_BONUS	=	src_bonus/collectible_bonus.c \
+				src_bonus/error_bonus.c \
+				src_bonus/linked_list_bonus.c \
+				src_bonus/main_bonus.c \
+				src_bonus/map_utils_bonus.c \
+				src_bonus/map_bonus.c \
+				src_bonus/render_utils_bonus.c \
+				src_bonus/render_bonus.c \
+				src_bonus/system_utils_bonus.c \
+				src_bonus/system_bonus.c \
+				src_bonus/texture_utils_bonus.c \
+				src_bonus/texture_bonus.c
+
 OBJ = $(SRC:%.c=%.o)
+OBJ_BONUS = $(SRC_BONUS:%.c=%.o)
 
 all: $(NAME)
 
 $(NAME): $(LIBFT) minilibx $(OBJ)
 	@$(CC) $(OBJ) $(LIBFT) $(CFLAGS) $(MLXFLAGS) -o $(NAME)
+	@echo "\n$(GREEN)--------------- COMPILATION COMPLETE ---------------\n$(RESET)"
+
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS): $(LIBFT) minilibx $(OBJ_BONUS)
+	@$(CC) $(OBJ_BONUS) $(LIBFT) $(CFLAGS) $(MLXFLAGS) -o $(NAME_BONUS)
 	@echo "\n$(GREEN)--------------- COMPILATION COMPLETE ---------------\n$(RESET)"
 
 minilibx:
@@ -66,7 +87,7 @@ $(LIBFT):
 	@cd $(LIBFT_PATH) && $(MAKE)
 
 clean:
-	@$(RM) $(OBJ)
+	@$(RM) $(OBJ) $(OBJ_BONUS);
 	@if [ -d "libft" ]; then \
 		cd $(LIBFT_PATH) && $(MAKE) clean; \
 	fi
@@ -75,7 +96,7 @@ cleanlib:
 	@$(RM) -r $(LIBFT_PATH) $(MLX_PATH)
 
 fclean:
-	@$(RM) $(NAME) $(OBJ)
+	@$(RM) $(NAME) $(OBJ) $(NAME_BONUS) $(OBJ_BONUS)
 	@if [ -d "libft" ]; then \
 		cd $(LIBFT_PATH) && $(MAKE) fclean; \
 	fi
@@ -83,4 +104,8 @@ fclean:
 		cd $(MLX_PATH) && $(MAKE) clean; \
 	fi
 
-re: clean all
+re: fclean all
+
+rebonus: fclean bonus
+
+.PHONY: all bonus minilibx clean cleanlib fclean re rebonus

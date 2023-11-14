@@ -6,13 +6,13 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 12:40:45 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 15:08:02 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 15:57:23 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Compile command: cc src/*.c Libft/*.c -Lmlx_linux -lmlx_Linux -lX11 -lXext
 
-#include "./include/so_long.h"
+#include "./include/so_long_bonus.h"
 #include "../minilibx-linux/mlx.h"
 
 t_sys	*init_program(char *path)

@@ -6,11 +6,11 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:35:27 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 15:08:06 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 15:57:29 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/so_long.h"
+#include "./include/so_long_bonus.h"
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdbool.h>

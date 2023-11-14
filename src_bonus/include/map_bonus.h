@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   map.h                                              :+:    :+:            */
+/*   map_bonus.h                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:37:10 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 13:27:34 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 15:55:10 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#ifndef MAP_BONUS_H
+# define MAP_BONUS_H
 # include <stdlib.h>
 # include <stdbool.h>
-# include "../libft/libft.h"
-# include "linked_list.h"
-# include "error.h"
+# include "../../libft/libft.h"
+# include "linked_list_bonus.h"
+# include "error_bonus.h"
 # define EMPTY_SPACE '0'
 # define WALL '1'
 # define COLLECTIBLE 'C'

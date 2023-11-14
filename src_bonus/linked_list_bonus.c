@@ -6,11 +6,11 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/13 13:44:02 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 15:07:59 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 15:57:20 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/linked_list.h"
+#include "./include/linked_list_bonus.h"
 #include <stdlib.h>
 
 t_lst	*lst_new(void *content)

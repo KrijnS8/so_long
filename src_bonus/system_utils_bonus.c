@@ -6,11 +6,11 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/13 12:24:19 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 15:12:15 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 15:57:37 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/so_long.h"
+#include "./include/so_long_bonus.h"
 #include "../minilibx-linux/mlx.h"
 
 void	load_frame_buffer(t_sys *data)

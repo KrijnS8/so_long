@@ -6,11 +6,11 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 14:32:31 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 15:08:04 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 15:57:26 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/so_long.h"
+#include "./include/so_long_bonus.h"
 #include <stdbool.h>
 
 char	*put_and_remove(char **dst, char *src)

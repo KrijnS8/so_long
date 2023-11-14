@@ -6,11 +6,11 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/08 16:39:49 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 15:08:54 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 15:57:34 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/so_long.h"
+#include "./include/so_long_bonus.h"
 #include "../minilibx-linux/mlx.h"
 
 void	render_background(t_sys *data, t_img *buf)

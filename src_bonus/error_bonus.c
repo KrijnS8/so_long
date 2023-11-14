@@ -6,12 +6,12 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/06 16:22:07 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 15:07:57 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 15:57:17 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "./include/so_long.h"
+#include "./include/so_long_bonus.h"
 
 const char	*g_error_map[] = {
 [ERR_MAP_INNIT_FAILURE] = "An error occured while allocating memory",

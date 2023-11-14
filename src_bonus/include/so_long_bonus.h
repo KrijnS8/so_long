@@ -6,20 +6,20 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/14 13:07:21 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 13:27:46 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 15:55:59 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
-# include "collectible.h"
-# include "error.h"
-# include "linked_list.h"
-# include "map.h"
-# include "render.h"
-# include "system.h"
-# include "texture.h"
-# include "../libft/libft.h"
+# include "collectible_bonus.h"
+# include "error_bonus.h"
+# include "linked_list_bonus.h"
+# include "map_bonus.h"
+# include "render_bonus.h"
+# include "system_bonus.h"
+# include "texture_bonus.h"
+# include "../../libft/libft.h"
 
 #endif

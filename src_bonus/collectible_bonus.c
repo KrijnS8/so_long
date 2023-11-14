@@ -6,11 +6,11 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/13 14:26:50 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 15:07:48 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 15:57:08 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/so_long.h"
+#include "./include/so_long_bonus.h"
 #include <stdlib.h>
 
 t_collectible	*new_collectible(int x, int y)
