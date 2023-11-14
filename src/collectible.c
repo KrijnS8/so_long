@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/13 14:26:50 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/13 15:58:28 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 12:49:38 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ t_collectible	*new_collectible(int x, int y)
 	return (new);
 }
 
-t_lst *is_on_collectible(t_sys *data)
+t_lst	*is_on_collectible(t_sys *data)
 {
 	t_player		*p_ptr;
 	t_lst			*l_ptr;
-	t_collectible *c_ptr;
+	t_collectible	*c_ptr;
 
 	p_ptr = data->player_data;
 	l_ptr = data->map->coll_lst;
@@ -45,15 +45,6 @@ t_lst *is_on_collectible(t_sys *data)
 	}
 	return (NULL);
 }
-
-/* int	is_on_collectible(t_sys *data, t_collectible *ptr)
-{
-	if (data->player_data->x != ptr->x)
-		return (0);
-	if (data->player_data->y != ptr->y)
-		return (0);
-	return (1);
-} */
 
 void	free_collectible(void *ptr)
 {

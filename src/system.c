@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 14:16:11 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/13 15:03:55 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 12:33:43 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_system(t_sys	*data)
 	data->floor = NULL;
 	data->wall = NULL;
 	data->exit = NULL;
-	data->background = NULL;
+	data->bg = NULL;
 	data->frame_buf = NULL;
 }
 
@@ -44,7 +44,7 @@ void	init_player(t_sys *data)
 	data->player_data->step_count = 0;
 }
 
-int destroy_system(t_sys *data)
+int	destroy_system(t_sys *data)
 {
 	destroy_textures(data);
 	destroy_frame_buffer(data);

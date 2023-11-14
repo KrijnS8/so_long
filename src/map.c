@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:35:27 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/13 14:36:27 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 12:13:31 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,23 +77,8 @@ static bool	check_chars(t_map *map)
 	{
 		if (!chrset(map->map[i], CHARSET))
 			return (false);
-		if (map->map[i] == EXIT)
-		{
-			if (map->exit_index != -1)
-				return (false);
-			map->exit_index = i;
-		}
-		if (map->map[i] == START)
-		{
-			if (map->start_index != -1)
-				return (false);
-			map->start_index = i;
-		}
-		if (map->map[i] == COLLECTIBLE)
-		{
-			map->coll_count++;
-			lst_add_back(&map->coll_lst, lst_new(new_collectible(i % map->line_len, i / map->line_len)));
-		}
+		if (!check_special_chars(map, i))
+			return (false);
 		i++;
 	}
 	if (map->exit_index == -1 || map->start_index == -1)

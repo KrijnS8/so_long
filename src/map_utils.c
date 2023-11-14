@@ -6,12 +6,14 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 14:32:31 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/13 14:31:58 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 12:28:00 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/map.h"
 #include "../Libft/libft.h"
+#include "../include/collectible.h"
+#include <stdbool.h>
 
 char	*put_and_remove(char **dst, char *src)
 {
@@ -50,8 +52,35 @@ t_map	*init_map(t_map *map)
 	return (map);
 }
 
-void	print_map(t_map *map)
+bool	check_special_chars(t_map *map, size_t index)
 {
-	ft_printf("Map: %s\nl_len: %d\nc_len: %d\nstart_index: %d\nexit_index: %d", \
-			map->map, (int)map->line_len, (int)map->column_len, map->start_index, map->exit_index);
+	if (map->map[index] == EXIT)
+	{
+		if (map->exit_index != -1)
+			return (false);
+		map->exit_index = index;
+	}
+	if (map->map[index] == START)
+	{
+		if (map->start_index != -1)
+			return (false);
+		map->start_index = index;
+	}
+	if (map->map[index] == COLLECTIBLE)
+	{
+		map->coll_count++;
+		lst_add_back(&map->coll_lst, \
+			lst_new(new_collectible(index % map->line_len, \
+									index / map->line_len)));
+	}
+	return (true);
 }
+
+/* void	print_map(t_map *map)
+{
+	ft_printf("Map: %s\nl_len: %d\nc_len: \
+			%d\nstart_index: %d\nexit_index: %d", \
+			map->map, (int)map->line_len, \
+			(int)map->column_len, map->start_index, map->exit_index);
+}
+ */

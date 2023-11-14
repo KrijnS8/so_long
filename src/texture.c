@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/08 17:29:18 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/12 19:41:30 by krijn         ########   odam.nl         */
+/*   Updated: 2023/11/14 12:39:12 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 t_img	*create_img(t_sys *data, char *path)
 {
 	t_img	*img;
-	
+
 	img = (t_img *)malloc(sizeof(t_img));
 	if (img == NULL)
 		system_error(data, ERR_SYS_MALLOC_FAILURE);
@@ -29,8 +29,9 @@ t_img	*create_img(t_sys *data, char *path)
 		free(img);
 		system_error(data, ERR_IMG_TEXTURE_FAILURE);
 	}
-	upscale_img(data, img, TEXTURE_FACTOR);
-	img->addr = mlx_get_data_addr(img->texture, &img->bpp, &img->size_line, &img->endian);
+	upscale_img(data, img);
+	img->addr = mlx_get_data_addr(img->texture, &img->bpp, \
+									&img->size_line, &img->endian);
 	return (img);
 }
 
@@ -50,7 +51,7 @@ void	destroy_textures(t_sys *data)
 	free_img(data, data->floor);
 	free_img(data, data->wall);
 	free_img(data, data->exit);
-	free_img(data, data->background);
+	free_img(data, data->bg);
 }
 
 void	load_textures(t_sys *data)
@@ -60,16 +61,17 @@ void	load_textures(t_sys *data)
 	data->floor = create_img(data, "resources/xpm/floor.xpm");
 	data->wall = create_img(data, "resources/xpm/wall.xpm");
 	data->exit = create_img(data, "resources/xpm/exit.xpm");
-	data->background = (t_img *)malloc(sizeof(t_img));
-	if (data->background == NULL)
+	data->bg = (t_img *)malloc(sizeof(t_img));
+	if (data->bg == NULL)
 		system_error(data, ERR_SYS_MALLOC_FAILURE);
-	data->background->width = data->map->line_len * (16 * TEXTURE_FACTOR);
-    data->background->height = data->map->column_len * (16 * TEXTURE_FACTOR);
-	data->background->texture = mlx_new_image(data->mlx_ptr, data->background->width, data->background->height);
-	if (data->background->texture == NULL)
+	data->bg->width = data->map->line_len * (16 * TEXTURE_FACTOR);
+	data->bg->height = data->map->column_len * (16 * TEXTURE_FACTOR);
+	data->bg->texture = mlx_new_image(data->mlx_ptr, \
+											data->bg->width, \
+											data->bg->height);
+	if (data->bg->texture == NULL)
 		system_error(data, ERR_SYS_MALLOC_FAILURE);
-	data->background->addr = mlx_get_data_addr(data->background->texture, &data->background->bpp, \
-												&data->background->size_line, &data->background->endian);
-	//printf("%s\n", (char *)data->background->addr);
-	render_background(data, data->background);
+	data->bg->addr = mlx_get_data_addr(data->bg->texture, &data->bg->bpp, \
+									&data->bg->size_line, &data->bg->endian);
+	render_background(data, data->bg);
 }

@@ -6,13 +6,14 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:37:10 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/13 14:30:34 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 12:51:40 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_H
 # define MAP_H
 # include <stdlib.h>
+# include <stdbool.h>
 # include "../Libft/libft.h"
 # include "linked_list.h"
 # include "error.h"
@@ -32,13 +33,13 @@ typedef struct s_map {
 	int		exit_index;
 	t_lst	*coll_lst;
 	int		coll_count;
-} t_map;
+}	t_map;
 
 extern t_map	*parse_map(char *path);
 extern t_map	*init_map(t_map *map);
 extern char		*put_and_remove(char **dst, char *src);
 extern int		chrset(char c, const char *set);
 extern void		print_map(t_map *map);
-extern void		map_error(t_error error, t_map *map);
+extern bool		check_special_chars(t_map *map, size_t index);
 
 #endif

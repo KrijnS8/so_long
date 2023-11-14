@@ -6,14 +6,14 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/06 16:21:14 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/08 17:32:42 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 12:50:58 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERROR_H
 # define ERROR_H
 
-typedef enum	e_error
+typedef enum e_error
 {
 	ERR_NO_ERR,
 	ERR_MAP_INNIT_FAILURE,
