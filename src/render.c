@@ -6,12 +6,12 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/08 16:39:49 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 13:10:45 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 13:31:52 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-#include "../mlx_linux/mlx.h"
+#include "../minilibx-linux/mlx.h"
 
 void	render_background(t_sys *data, t_img *buf)
 {
@@ -23,10 +23,10 @@ void	render_background(t_sys *data, t_img *buf)
 	map = data->map;
 	y = 0;
 	size = data->wall->width;
-	while (y < map->column_len)
+	while (y < (int)map->column_len)
 	{
 		x = 0;
-		while (x < map->line_len)
+		while (x < (int)map->line_len)
 		{
 			if (map->map[y * map->line_len + x] == WALL)
 				put_img_to_img(buf, data->wall, x * size, y * size);

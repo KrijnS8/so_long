@@ -6,12 +6,12 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 14:16:11 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 13:12:36 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 14:16:21 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-#include "../mlx_linux/mlx.h"
+#include "../minilibx-linux/mlx.h"
 #include <stdio.h>
 
 void	init_system(t_sys	*data)
@@ -60,7 +60,7 @@ int	destroy_system(t_sys *data)
 	if (data->player_data != NULL)
 		free(data->player_data);
 	free(data);
-	exit(1);
+	exit(0);
 	return (0);
 }
 

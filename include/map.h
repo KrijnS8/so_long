@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:37:10 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 12:51:40 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 13:27:34 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MAP_H
 # include <stdlib.h>
 # include <stdbool.h>
-# include "../Libft/libft.h"
+# include "../libft/libft.h"
 # include "linked_list.h"
 # include "error.h"
 # define EMPTY_SPACE '0'

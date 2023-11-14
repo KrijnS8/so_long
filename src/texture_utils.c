@@ -6,12 +6,12 @@
 /*   By: krijn <krijn@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/10 11:28:03 by krijn         #+#    #+#                 */
-/*   Updated: 2023/11/14 13:12:41 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 13:22:22 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-#include "../mlx_linux/mlx.h"
+#include "../minilibx-linux/mlx.h"
 
 static void	update_pixels(char *odata, char *udata, \
 							int new_width, int new_height)

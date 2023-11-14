@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/14 13:07:21 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 13:16:57 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 13:27:46 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 # include "render.h"
 # include "system.h"
 # include "texture.h"
-# include "../Libft/libft.h"
+# include "../libft/libft.h"
 
 #endif

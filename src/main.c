@@ -6,14 +6,14 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 12:40:45 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 13:12:01 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 13:31:23 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Compile command: cc src/*.c Libft/*.c -Lmlx_linux -lmlx_Linux -lX11 -lXext
 
 #include "../include/so_long.h"
-#include "../mlx_linux/mlx.h"
+#include "../minilibx-linux/mlx.h"
 
 t_sys	*init_program(char *path)
 {
@@ -44,6 +44,11 @@ int	main(int argc, char *argv[])
 {
 	t_sys	*system;
 
+	if (argc != 2)
+	{
+		print_error(ERR_MAP_GENERATE_FAILURE);
+		exit(1);
+	}
 	system = init_program(argv[1]);
 	mlx_hook(system->mlx_win, ON_KEYDOWN, 1L << 0, handle_input, system);
 	mlx_hook(system->mlx_win, ON_DESTROY, 0L, destroy_system, system);

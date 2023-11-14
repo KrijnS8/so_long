@@ -6,12 +6,12 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/08 17:29:18 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 13:12:49 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/14 13:22:39 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-#include "../mlx_linux/mlx.h"
+#include "../minilibx-linux/mlx.h"
 
 t_img	*create_img(t_sys *data, char *path)
 {
