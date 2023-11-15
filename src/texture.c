@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/08 17:29:18 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 15:12:35 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/15 16:43:10 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ void	destroy_textures(t_sys *data)
 
 void	load_textures(t_sys *data)
 {
-	data->player = create_img(data, "resources/xpm/player.xpm");
-	data->collectible = create_img(data, "resources/xpm/collectible.xpm");
-	data->floor = create_img(data, "resources/xpm/floor.xpm");
-	data->wall = create_img(data, "resources/xpm/wall.xpm");
-	data->exit = create_img(data, "resources/xpm/exit.xpm");
+	data->player = create_img(data, "src/resources/player.xpm");
+	data->collectible = create_img(data, "src/resources/collectible.xpm");
+	data->floor = create_img(data, "src/resources/floor.xpm");
+	data->wall = create_img(data, "src/resources/wall.xpm");
+	data->exit = create_img(data, "src/resources/exit.xpm");
 	data->bg = (t_img *)malloc(sizeof(t_img));
 	if (data->bg == NULL)
 		system_error(data, ERR_SYS_MALLOC_FAILURE);

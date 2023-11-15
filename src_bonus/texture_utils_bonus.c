@@ -1,17 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   texture_utils.c                                    :+:    :+:            */
+/*   texture_utils_bonus.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: krijn <krijn@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/10 11:28:03 by krijn         #+#    #+#                 */
-/*   Updated: 2023/11/14 15:57:43 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/15 16:54:27 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/so_long_bonus.h"
 #include "../minilibx-linux/mlx.h"
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 static void	update_pixels(char *odata, char *udata, \
 							int new_width, int new_height)
@@ -79,4 +82,41 @@ void	upscale_img(t_sys *data, t_img *img)
 	img->texture = new_texture;
 	img->width = new_width;
 	img->height = new_height;
+}
+
+char	*build_path(char *folder, char *file, char *extention)
+{
+	char	*path;
+	char	*temp;
+
+	temp = ft_strjoin(folder, file);
+	path = ft_strjoin(temp, extention);
+	free(temp);
+	return (path);
+}
+
+int	count_textures(char *path)
+{
+	int		fd;
+	int		count;
+	char	*nbr;
+	char	*file;
+
+	count = 0;
+	nbr = ft_itoa(count);
+	file = build_path(path, nbr, ".xpm");
+	fd = open(file, O_RDONLY);
+	free(file);
+	free(nbr);
+	while (fd != -1)
+	{
+		count++;
+		nbr = ft_itoa(count);
+		file = build_path(path, nbr, ".xpm");
+		close(fd);
+		fd = open(file, O_RDONLY);
+		free(file);
+		free(nbr);
+	}
+	return (count);
 }

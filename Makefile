@@ -6,15 +6,16 @@
 #    By: kschelvi <kschelvi@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/11/01 13:23:25 by kschelvi      #+#    #+#                  #
-#    Updated: 2023/11/14 16:13:36 by kschelvi      ########   odam.nl          #
+#    Updated: 2023/11/15 15:27:43 by kschelvi      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 NAME_BONUS = so_long_bonus
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS=-I./src_bonus/include
 MLXFLAGS = -Lminilibx-linux -lmlx_Linux -lXext -lX11
+VALGRIND_FLAGS = --leak-check=full
 
 LIBFT_PATH = ./libft
 LIBFT = $(LIBFT_PATH)/libft.a
@@ -48,8 +49,11 @@ SRC_BONUS	=	src_bonus/collectible_bonus.c \
 				src_bonus/render_bonus.c \
 				src_bonus/system_utils_bonus.c \
 				src_bonus/system_bonus.c \
+				src_bonus/texture_utils_2_bonus.c \
 				src_bonus/texture_utils_bonus.c \
-				src_bonus/texture_bonus.c
+				src_bonus/texture_bonus.c \
+				src_bonus/animation_bonus.c \
+				src_bonus/player_bonus.c
 
 OBJ = $(SRC:%.c=%.o)
 OBJ_BONUS = $(SRC_BONUS:%.c=%.o)
@@ -86,11 +90,34 @@ $(LIBFT):
 	@echo "\n$(GREEN)--------------- COMPILING LIBFT ---------------$(RESET)"
 	@cd $(LIBFT_PATH) && $(MAKE)
 
+valgrind: all
+	@valgrind $(VALGRIND_FLAGS) $(NAME) map.ber
+
+run: all
+	@if [ -e "map.ber" ]; then \
+		echo "$(GREEN)STARTING SO_LONG...$(RESET)"; \
+		./$(NAME) map.ber; \
+		echo "$(RED)CLOSING SO_LONG...$(RESET)"; \
+	else \
+		echo "$(RED)NO MAP.BER FILE$(RESET)"; \
+	fi
+
+runbonus: rebonus
+	@if [ -e "map.ber" ]; then \
+		echo "$(GREEN)STARTING SO_LONG_BONUS...$(RESET)"; \
+		./$(NAME_BONUS) map.ber; \
+		echo "$(RED)CLOSING SO_LONG_BONUS...$(RESET)"; \
+	else \
+		echo "$(RED)NO MAP.BER FILE$(RESET)"; \
+	fi
+
 clean:
 	@$(RM) $(OBJ) $(OBJ_BONUS);
 	@if [ -d "libft" ]; then \
 		cd $(LIBFT_PATH) && $(MAKE) clean; \
 	fi
+
+lib: minilibx $(LIBFT)
 
 cleanlib:
 	@$(RM) -r $(LIBFT_PATH) $(MLX_PATH)
@@ -108,4 +135,4 @@ re: fclean all
 
 rebonus: fclean bonus
 
-.PHONY: all bonus minilibx clean cleanlib fclean re rebonus
+.PHONY: all bonus minilibx clean lib cleanlib fclean re rebonus

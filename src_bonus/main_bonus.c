@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   main_bonus.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 12:40:45 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 15:57:23 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/15 14:42:51 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Compile command: cc src/*.c Libft/*.c -Lmlx_linux -lmlx_Linux -lX11 -lXext
+// Compile command: cc src_bonus/*.c libft/*.c -Lminilibx-linux -lmlx_Linux -lX11 -lXext
 
 #include "./include/so_long_bonus.h"
 #include "../minilibx-linux/mlx.h"
@@ -57,3 +57,10 @@ int	main(int argc, char *argv[])
 	destroy_system(system);
 	return (0);
 }
+/* 
+int main()
+{
+	ft_printf("%d\n", count_textures("src_bonus/resources/player/idle/"));
+	return (0);
+}
+ */

@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 13:59:25 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 15:56:40 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/15 15:47:15 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define ON_KEYDOWN 2
 # define ON_DESTROY 17
 
+typedef struct s_player t_player;
+
 typedef struct s_img
 {
 	void	*texture;
@@ -31,12 +33,11 @@ typedef struct s_img
 	int		height;
 }	t_img;
 
-typedef struct s_player
+typedef struct s_textures
 {
-	int	x;
-	int	y;
-	int	step_count;
-}	t_player;
+	t_img	**map;
+	int		size;
+}	t_textures;
 
 typedef struct s_sys
 {
@@ -45,7 +46,10 @@ typedef struct s_sys
 	t_player	*player_data;
 	t_img		*frame_buf;
 	t_map		*map;
-	t_img		*player;
+	t_textures	*player_idle;
+	t_textures	*player_rev_idle;
+	t_textures	*player_run;
+	t_textures	*player_rev_run;
 	t_img		*collectible;
 	t_img		*wall;
 	t_img		*floor;
@@ -54,12 +58,10 @@ typedef struct s_sys
 }	t_sys;
 
 void	init_system(t_sys	*data);
-void	init_player(t_sys *data);
 int		destroy_system(t_sys *data);
 void	system_error(t_sys *data, t_error error);
 int		handle_input(int keysym, t_sys *data);
 void	load_frame_buffer(t_sys *data);
 void	destroy_frame_buffer(t_sys *data);
-void	move_player(t_sys *data, int x, int y);
 
 #endif

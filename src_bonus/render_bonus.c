@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   render.c                                           :+:    :+:            */
+/*   render_bonus.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/08 16:39:49 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 15:57:34 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/15 15:59:26 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,21 @@ void	draw_player(t_sys *data, t_img *buf)
 
 	x = data->player_data->x;
 	y = data->player_data->y;
-	size = data->player->width;
-	put_img_to_img(buf, data->player, x * size, (y - 0.5) * size);
+	size = data->wall->width;
+	if (data->player_data->rotation == 1)
+	{
+		if (data->player_data->state == PLAYER_STATE_IDLE)
+			put_img_to_img(buf, data->player_idle->map[data->player_data->anim->current_frame], x * size, (y - 0.5) * size);
+		if (data->player_data->state == PLAYER_STATE_RUN)
+			put_img_to_img(buf, data->player_run->map[data->player_data->anim->current_frame], x * size, (y - 0.5) * size);
+	}
+	else
+	{
+		if (data->player_data->state == PLAYER_STATE_IDLE)
+			put_img_to_img(buf, data->player_rev_idle->map[data->player_data->anim->current_frame], x * size, (y - 0.5) * size);
+		if (data->player_data->state == PLAYER_STATE_RUN)
+			put_img_to_img(buf, data->player_rev_run->map[data->player_data->anim->current_frame], x * size, (y - 0.5) * size);
+	}
 }
 
 // TODO: animation struct in linked list that updates every frame
@@ -83,6 +96,7 @@ int	handle_render(t_sys *data)
 	t_img	*buf;
 
 	buf = data->frame_buf;
+	update_player_anim(data, data->player_data->state);
 	draw_background(data, buf);
 	draw_objectives(data, buf);
 	draw_player(data, buf);
