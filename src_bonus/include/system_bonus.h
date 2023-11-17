@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 13:59:25 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/15 15:47:15 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/17 13:45:43 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_sys
 	t_textures	*player_rev_idle;
 	t_textures	*player_run;
 	t_textures	*player_rev_run;
-	t_img		*collectible;
+	t_textures	*collectible;
 	t_img		*wall;
 	t_img		*floor;
 	t_img		*exit;

@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/08 16:39:49 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/15 15:59:26 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/17 14:53:50 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,19 @@ void	draw_objectives(t_sys *data, t_img *buf)
 	t_collectible	*content;
 	int				size;
 
-	size = data->collectible->width;
+	size = data->wall->width;
 	ptr = data->map->coll_lst;
 	while (ptr != NULL)
 	{
 		content = (t_collectible *)ptr->content;
 		x = content->x;
 		y = content->y;
-		put_img_to_img(buf, data->collectible, x * size, y * size);
+		if (content->anim != NULL)
+		{
+			put_img_to_img(buf, data->collectible->map[content->anim->current_frame], x * size, y * size);
+		}
+		else
+			put_img_to_img(buf, data->collectible->map[0], x * size, y * size);
 		ptr = ptr->next;
 	}
 }
@@ -97,6 +102,7 @@ int	handle_render(t_sys *data)
 
 	buf = data->frame_buf;
 	update_player_anim(data, data->player_data->state);
+	update_collectible_anim(data);
 	draw_background(data, buf);
 	draw_objectives(data, buf);
 	draw_player(data, buf);

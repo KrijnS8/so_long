@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 13:54:54 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/15 16:10:21 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/17 15:10:07 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ void	move_player(t_sys *data, int x, int y)
 		ft_printf("Move count: %d\n", data->player_data->step_count);
 	}
 	node = is_on_collectible(data);
-	if (node != NULL)
+	if (node != NULL && ((t_collectible *)node->content)->opened == 0)
 	{
-		lst_del_node(&data->map->coll_lst, node, free_collectible);
+		start_collectible_anim(data, (t_collectible *)node->content);
 		data->map->coll_count--;
 	}
 	if (data->map->map[py * data->map->line_len + px] == EXIT)
 	{
-		if (data->map->coll_lst == NULL)
+		if (data->map->coll_count == 0)
 			destroy_system(data);
 	}
 	if (x > 0)

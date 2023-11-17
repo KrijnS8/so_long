@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   collectible.c                                      :+:    :+:            */
+/*   collectible_bonus.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/13 14:26:50 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 15:57:08 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/17 15:09:53 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ t_collectible	*new_collectible(int x, int y)
 		return (NULL);
 	new->x = x;
 	new->y = y;
-	new->show = 1;
+	new->opened = 0;
+	new->anim = NULL;
 	return (new);
 }
 
@@ -46,6 +47,58 @@ t_lst	*is_on_collectible(t_sys *data)
 
 void	free_collectible(void *ptr)
 {
-	if (ptr != NULL)
-		free(ptr);
+	t_collectible	*coll;
+
+	coll = (t_collectible *)ptr;
+	if (coll->anim != NULL)
+		free(coll->anim);
+	if (coll != NULL)
+		free(coll);
+}
+
+void	start_collectible_anim(t_sys *data, t_collectible *coll)
+{
+	coll->opened = 1;
+	coll->anim = (t_anim *)malloc(sizeof(t_anim));
+	if (coll->anim == NULL)
+		system_error(data, ERR_SYS_MALLOC_FAILURE);
+	coll->anim->current_frame = 0;
+	coll->anim->frame_count = data->collectible->size;
+	coll->anim->ticks_to_next = ANIMATION_TICK_RATE;
+}
+
+void	update_collectible_anim(t_sys *data)
+{
+	t_lst			*node;
+	t_lst			*next_node;
+	t_collectible	*content;
+
+	node = data->map->coll_lst;
+	while (node != NULL)
+	{
+		content = (t_collectible *)node->content;
+		if (content->anim == NULL)
+		{
+			node = node->next;
+			continue ;
+		}
+		if (content->anim->ticks_to_next == 0)
+		{
+			if (content->anim->current_frame < content->anim->frame_count - 1)
+			{
+				content->anim->current_frame++;
+				content->anim->ticks_to_next = ANIMATION_TICK_RATE;
+			}
+			else
+			{
+				next_node = node->next;
+				//lst_del_node(&data->map->coll_lst, node, free_collectible);
+				node = next_node;
+				continue ;
+			}
+		}
+		else
+			content->anim->ticks_to_next--;
+		node = node->next;
+	}
 }

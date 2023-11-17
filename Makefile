@@ -6,7 +6,7 @@
 #    By: kschelvi <kschelvi@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/11/01 13:23:25 by kschelvi      #+#    #+#                  #
-#    Updated: 2023/11/15 15:27:43 by kschelvi      ########   odam.nl          #
+#    Updated: 2023/11/17 12:36:13 by kschelvi      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,32 +62,49 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) minilibx $(OBJ)
 	@$(CC) $(OBJ) $(LIBFT) $(CFLAGS) $(MLXFLAGS) -o $(NAME)
-	@echo "\n$(GREEN)--------------- COMPILATION COMPLETE ---------------\n$(RESET)"
+	@echo "$(GREEN)";
+	@echo " _____                                                                  _____ ";
+	@echo "( ___ )                                                                ( ___ )";
+	@echo " |   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|   | ";
+	@echo " |   |$(RESET)                              ████                                $(GREEN)|   | ";
+	@echo " |   |$(RESET)                             ░░███                                $(GREEN)|   | ";
+	@echo " |   |$(RESET)    █████   ██████            ░███   ██████  ████████    ███████  $(GREEN)|   | ";
+	@echo " |   |$(RESET)   ███░░   ███░░███           ░███  ███░░███░░███░░███  ███░░███  $(GREEN)|   | ";
+	@echo " |   |$(RESET)  ░░█████ ░███ ░███           ░███ ░███ ░███ ░███ ░███ ░███ ░███  $(GREEN)|   | ";
+	@echo " |   |$(RESET)   ░░░░███░███ ░███           ░███ ░███ ░███ ░███ ░███ ░███ ░███  $(GREEN)|   | ";
+	@echo " |   |$(RESET)   ██████ ░░██████  █████████ █████░░██████  ████ █████░░███████  $(GREEN)|   | ";
+	@echo " |   |$(RESET)  ░░░░░░   ░░░░░░  ░░░░░░░░░ ░░░░░  ░░░░░░  ░░░░ ░░░░░  ░░░░░███  $(GREEN)|   | ";
+	@echo " |   |$(RESET)                                                        ███ ░███  $(GREEN)|   | ";
+	@echo " |   |$(RESET)                                                       ░░██████   $(GREEN)|   | ";
+	@echo " |   |$(RESET)                                                        ░░░░░░    $(GREEN)|   | ";
+	@echo " |___|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|___| ";
+	@echo "(_____)                                                                (_____)";
+	@echo "$(RESET)";
 
 bonus: $(NAME_BONUS)
 
 $(NAME_BONUS): $(LIBFT) minilibx $(OBJ_BONUS)
 	@$(CC) $(OBJ_BONUS) $(LIBFT) $(CFLAGS) $(MLXFLAGS) -o $(NAME_BONUS)
-	@echo "\n$(GREEN)--------------- COMPILATION COMPLETE ---------------\n$(RESET)"
+	@echo "$(GREEN)Compilation complete$(RESET)"
 
 minilibx:
 	@if [ -d "minilibx-linux" ]; then \
-		echo "\n$(RED)minilibx-linux already exists$(RESET)"; \
+		echo "$(RED)minilibx-linux already exists$(RESET)"; \
 	else \
-		echo "\n$(GREEN)--------------- CLONING MINILIBX-LINUX ---------------$(RESET)"; \
+		echo "$(GREEN)Cloning minilibx-linux...$(RESET)"; \
 		git clone https://github.com/42Paris/minilibx-linux.git; \
 	fi
-	@echo "\n$(GREEN)--------------- COMPILING MINILIBX-LINUX ---------------$(RESET)"
+	@echo "$(GREEN)Compiling minilibx-linux...$(RESET)"
 	@cd $(MLX_PATH) && $(MAKE)
 
 $(LIBFT):
 	@if [ -d "libft" ]; then \
-		echo "\n$(RED)libft already exists$(RESET)"; \
+		echo "$(RED)libft already exists$(RESET)"; \
 	else \
-		echo "\n$(GREEN)--------------- CLONING LIBFT ---------------$(RESET)"; \
+		echo "$(GREEN)Cloning libft...$(RESET)"; \
 		git clone https://github.com/KrijnS8/libft.git; \
 	fi
-	@echo "\n$(GREEN)--------------- COMPILING LIBFT ---------------$(RESET)"
+	@echo "$(GREEN)Compiling libft...$(RESET)"
 	@cd $(LIBFT_PATH) && $(MAKE)
 
 valgrind: all

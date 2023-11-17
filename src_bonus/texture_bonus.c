@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/08 17:29:18 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/15 16:53:32 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/17 14:14:29 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ void	destroy_player_textures(t_sys *data)
 
 void	destroy_textures(t_sys *data)
 {
-	free_img(data, data->collectible);
 	free_img(data, data->floor);
 	free_img(data, data->wall);
 	free_img(data, data->exit);
 	free_img(data, data->bg);
 	destroy_player_textures(data);
+	destroy_texture_struct(data, data->collectible);
 }
 
 void	load_player_idle(t_sys *data)
@@ -167,10 +167,35 @@ void	load_player(t_sys *data)
 	}
 }
 
+void	load_collectible(t_sys *data)
+{
+	int		i;
+	char	*path;
+	char	*nbr;
+
+	data->collectible = (t_textures *)malloc(sizeof(t_textures));
+	if (data->collectible == NULL)
+		system_error(data, ERR_SYS_MALLOC_FAILURE);
+	data->collectible->size = count_textures("src_bonus/resources/collectible/");
+	data->collectible->map = (t_img **)malloc(data->collectible->size * sizeof(t_img *));
+	if (data->collectible->map == NULL)
+		system_error(data, ERR_SYS_MALLOC_FAILURE);
+	i = 0;
+	while (i < data->collectible->size)
+	{
+		nbr = ft_itoa(i);
+		path = build_path("src_bonus/resources/collectible/", nbr, ".xpm");
+		free(nbr);
+		data->collectible->map[i] = create_img(data, path);
+		free(path);
+		i++;
+	}
+}
+
 void	load_textures(t_sys *data)
 {
 	load_player(data);
-	data->collectible = create_img(data, "src_bonus/resources/collectible.xpm");
+	load_collectible(data);
 	data->floor = create_img(data, "src_bonus/resources/floor.xpm");
 	data->wall = create_img(data, "src_bonus/resources/wall.xpm");
 	data->exit = create_img(data, "src_bonus/resources/exit.xpm");
