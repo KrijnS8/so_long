@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 14:16:11 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/15 16:16:30 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/17 17:03:15 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	destroy_system(t_sys *data)
 	if (data->player_data != NULL)
 		free(data->player_data);
 	free(data);
+	ft_printf("%sClosing so_long_bonus...%s\n", RED, RESET);
 	exit(0);
 	return (0);
 }

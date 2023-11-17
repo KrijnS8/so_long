@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/14 13:07:21 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/15 13:51:09 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/17 17:02:47 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,9 @@
 # include "animation_bonus.h"
 # include "player_bonus.h"
 # include "../../libft/libft.h"
+
+#define GREEN "\033[0;32m"
+#define RED "\033[0;31m"
+#define RESET "\033[0m"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 12:40:45 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/15 14:42:51 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/11/17 17:18:25 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	main(int argc, char *argv[])
 		print_error(ERR_MAP_GENERATE_FAILURE);
 		exit(1);
 	}
+	ft_printf("%sStarting so_long_bonus...%s\n", GREEN, RESET);
 	system = init_program(argv[1]);
 	mlx_hook(system->mlx_win, ON_KEYDOWN, 1L << 0, handle_input, system);
 	mlx_hook(system->mlx_win, ON_DESTROY, 0L, destroy_system, system);

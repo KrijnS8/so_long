@@ -6,7 +6,7 @@
 #    By: kschelvi <kschelvi@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/11/01 13:23:25 by kschelvi      #+#    #+#                  #
-#    Updated: 2023/11/17 12:36:13 by kschelvi      ########   odam.nl          #
+#    Updated: 2023/11/17 17:10:40 by kschelvi      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ MLX_PATH = ./minilibx-linux
 
 GREEN = \033[0;32m
 RED = \033[0;31m
+YELLOW = \033[0;33m
 RESET = \033[0m
 
 SRC	=	src/collectible.c \
@@ -62,30 +63,17 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) minilibx $(OBJ)
 	@$(CC) $(OBJ) $(LIBFT) $(CFLAGS) $(MLXFLAGS) -o $(NAME)
-	@echo "$(GREEN)";
-	@echo " _____                                                                  _____ ";
-	@echo "( ___ )                                                                ( ___ )";
-	@echo " |   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|   | ";
-	@echo " |   |$(RESET)                              ████                                $(GREEN)|   | ";
-	@echo " |   |$(RESET)                             ░░███                                $(GREEN)|   | ";
-	@echo " |   |$(RESET)    █████   ██████            ░███   ██████  ████████    ███████  $(GREEN)|   | ";
-	@echo " |   |$(RESET)   ███░░   ███░░███           ░███  ███░░███░░███░░███  ███░░███  $(GREEN)|   | ";
-	@echo " |   |$(RESET)  ░░█████ ░███ ░███           ░███ ░███ ░███ ░███ ░███ ░███ ░███  $(GREEN)|   | ";
-	@echo " |   |$(RESET)   ░░░░███░███ ░███           ░███ ░███ ░███ ░███ ░███ ░███ ░███  $(GREEN)|   | ";
-	@echo " |   |$(RESET)   ██████ ░░██████  █████████ █████░░██████  ████ █████░░███████  $(GREEN)|   | ";
-	@echo " |   |$(RESET)  ░░░░░░   ░░░░░░  ░░░░░░░░░ ░░░░░  ░░░░░░  ░░░░ ░░░░░  ░░░░░███  $(GREEN)|   | ";
-	@echo " |   |$(RESET)                                                        ███ ░███  $(GREEN)|   | ";
-	@echo " |   |$(RESET)                                                       ░░██████   $(GREEN)|   | ";
-	@echo " |   |$(RESET)                                                        ░░░░░░    $(GREEN)|   | ";
-	@echo " |___|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|___| ";
-	@echo "(_____)                                                                (_____)";
-	@echo "$(RESET)";
+	$(MAKE) -s name
+	@echo "$(GREEN)Compilation successfull!$(RESET)";
+	@echo "$(YELLOW)Run this command in root folder: ./so_long <map_name>$(RESET)"
 
 bonus: $(NAME_BONUS)
 
 $(NAME_BONUS): $(LIBFT) minilibx $(OBJ_BONUS)
 	@$(CC) $(OBJ_BONUS) $(LIBFT) $(CFLAGS) $(MLXFLAGS) -o $(NAME_BONUS)
-	@echo "$(GREEN)Compilation complete$(RESET)"
+	@$(MAKE) -s name
+	@echo "$(GREEN)Compilation succesfull!$(RESET)"
+	@echo "$(YELLOW)Run this command in root folder: ./so_long_bonus <map_name>$(RESET)"
 
 minilibx:
 	@if [ -d "minilibx-linux" ]; then \
@@ -107,23 +95,37 @@ $(LIBFT):
 	@echo "$(GREEN)Compiling libft...$(RESET)"
 	@cd $(LIBFT_PATH) && $(MAKE)
 
+name:
+	@echo ""
+	@echo "                     ████                              ";
+	@echo "                    ░░███                              ";
+	@echo "  █████   ██████     ░███   ██████  ████████    ███████";
+	@echo " ███░░   ███░░███    ░███  ███░░███░░███░░███  ███░░███";
+	@echo "░░█████ ░███ ░███    ░███ ░███ ░███ ░███ ░███ ░███ ░███";
+	@echo " ░░░░███░███ ░███    ░███ ░███ ░███ ░███ ░███ ░███ ░███";
+	@echo " ██████ ░░██████     █████░░██████  ████ █████░░███████";
+	@echo "░░░░░░   ░░░░░░     ░░░░░  ░░░░░░  ░░░░ ░░░░░  ░░░░░███";
+	@echo "                                               ███ ░███";
+	@echo "                                              ░░██████ ";
+	@echo "                                               ░░░░░░  ";
+
 valgrind: all
 	@valgrind $(VALGRIND_FLAGS) $(NAME) map.ber
 
 run: all
 	@if [ -e "map.ber" ]; then \
-		echo "$(GREEN)STARTING SO_LONG...$(RESET)"; \
+		clear; \
+		$(MAKE) -s name; \
 		./$(NAME) map.ber; \
-		echo "$(RED)CLOSING SO_LONG...$(RESET)"; \
 	else \
 		echo "$(RED)NO MAP.BER FILE$(RESET)"; \
 	fi
 
-runbonus: rebonus
+runbonus: bonus
 	@if [ -e "map.ber" ]; then \
-		echo "$(GREEN)STARTING SO_LONG_BONUS...$(RESET)"; \
+		clear; \
+		$(MAKE) -s name; \
 		./$(NAME_BONUS) map.ber; \
-		echo "$(RED)CLOSING SO_LONG_BONUS...$(RESET)"; \
 	else \
 		echo "$(RED)NO MAP.BER FILE$(RESET)"; \
 	fi
