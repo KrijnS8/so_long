@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   linked_list.h                                      :+:    :+:            */
+/*   linked_list_bonus.h                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/13 13:43:24 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/13 16:04:45 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/08 18:00:02 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINKED_LIST_H
-# define LINKED_LIST_H
+#ifndef LINKED_LIST_BONUS_H
+# define LINKED_LIST_BONUS_H
 
 typedef struct s_lst
 {

@@ -6,17 +6,18 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/13 13:32:10 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/08 15:22:22 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/08 17:59:41 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLLECTIBLE_H
-# define COLLECTIBLE_H
+#ifndef COLLECTIBLE_BONUS_H
+# define COLLECTIBLE_BONUS_H
 
 typedef struct s_lst	t_lst;
 typedef struct s_sys	t_sys;
 
-typedef struct s_collectible {
+typedef struct s_collectible
+{
 	int	x;
 	int	y;
 	int	show;

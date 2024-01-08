@@ -6,12 +6,12 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/14 13:07:21 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/08 15:42:27 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/08 18:00:46 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include "animation_bonus.h"
 # include "collectible_bonus.h"

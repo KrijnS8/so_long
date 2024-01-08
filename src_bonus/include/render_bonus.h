@@ -6,14 +6,14 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/08 16:41:09 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/08 15:31:04 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/08 18:00:39 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDER_H
-# define RENDER_H
+#ifndef RENDER_BONUS_H
+# define RENDER_BONUS_H
 
-#include "system_bonus.h"
+# include "system_bonus.h"
 
 int				handle_render(t_sys *system);
 void			render_background(t_sys *data, t_img *buf);

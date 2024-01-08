@@ -6,7 +6,7 @@
 /*   By: krijn <krijn@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/10 11:28:03 by krijn         #+#    #+#                 */
-/*   Updated: 2024/01/08 14:27:32 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/08 17:56:09 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,49 @@ void	upscale_img(t_sys *data, t_img *img)
 	img->texture = new_texture;
 	img->width = new_width;
 	img->height = new_height;
+}
+
+static void	reverse_copy(t_img *dst, t_img *src)
+{
+	char	*odata;
+	char	*rdata;
+	int		y;
+	int		x;
+	int		j;
+
+	odata = (char *)src->addr;
+	rdata = (char *)dst->addr;
+	y = 0;
+	while (y < dst->height)
+	{
+		x = 0;
+		while (x < dst->width * (src->bpp / 8))
+		{
+			j = 0;
+			while (j < src->bpp / 8)
+			{
+				rdata[(y * dst->size_line + (dst->width - 1) * (src->bpp / 8)) \
+						- x + j] = odata[y * src->size_line + x + j];
+				j++;
+			}
+			x += src->bpp / 8;
+		}
+		y++;
+	}
+}
+
+t_img	*reverse_img(t_sys *data, t_img *img)
+{
+	t_img	*new_img;
+
+	new_img = (t_img *)malloc(sizeof(t_img));
+	if (new_img == NULL)
+		system_error(data, ERR_SYS_MALLOC_FAILURE);
+	new_img->texture = mlx_new_image(data->mlx_ptr, img->width, img->height);
+	new_img->width = img->width;
+	new_img->height = img->height;
+	new_img->addr = mlx_get_data_addr(new_img->texture, &new_img->bpp, \
+								&new_img->size_line, &new_img->endian);
+	reverse_copy(new_img, img);
+	return (new_img);
 }

@@ -6,12 +6,12 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 13:59:25 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/08 15:37:03 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/08 18:00:52 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SYSTEM_H
-# define SYSTEM_H
+#ifndef SYSTEM_BONUS_H
+# define SYSTEM_BONUS_H
 # include <X11/keysym.h>
 # include "error_bonus.h"
 
@@ -43,6 +43,7 @@ typedef struct s_sys
 	t_img		*frame_buf;
 	t_map		*map;
 	t_anim		*player;
+	t_anim		*player_rev;
 	t_img		*collectible;
 	t_img		*wall;
 	t_img		*floor;

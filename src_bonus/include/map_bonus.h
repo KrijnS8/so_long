@@ -6,12 +6,12 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:37:10 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/08 15:23:15 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/08 18:00:24 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#ifndef MAP_BONUS_H
+# define MAP_BONUS_H
 # include <stdlib.h>
 # include <stdbool.h>
 # include "../../libft/libft.h"
@@ -24,7 +24,8 @@
 
 typedef struct s_lst	t_lst;
 
-typedef struct s_map {
+typedef struct s_map
+{
 	char	*map;
 	size_t	map_len;
 	size_t	line_len;

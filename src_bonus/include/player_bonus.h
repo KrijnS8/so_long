@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/08 15:03:31 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/08 15:37:52 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/08 17:47:01 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ void	init_player(t_sys *data);
 void	move_player(t_sys *data, int x, int y);
 void	draw_player(t_sys *data, t_img *buf);
 void	load_player(t_sys *data);
+void	check_collision(t_sys *data);
+void	load_player_rev(t_sys *data);
 
 #endif

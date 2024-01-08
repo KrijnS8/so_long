@@ -6,12 +6,14 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/08 17:29:18 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/08 14:27:28 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/08 17:36:17 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/so_long_bonus.h"
 #include "../minilibx-linux/mlx.h"
+#include <fcntl.h>
+#include <unistd.h>
 
 t_img	*create_img(t_sys *data, char *path)
 {
@@ -44,7 +46,8 @@ void	free_img(t_sys *data, t_img *img)
 
 void	destroy_textures(t_sys *data)
 {
-	free_img(data, data->player);
+	destroy_anim(data, data->player);
+	destroy_anim(data, data->player_rev);
 	free_img(data, data->collectible);
 	free_img(data, data->floor);
 	free_img(data, data->wall);
@@ -54,7 +57,7 @@ void	destroy_textures(t_sys *data)
 
 void	load_textures(t_sys *data)
 {
-	data->player = create_img(data, "src/resources/player.xpm");
+	load_player(data);
 	data->collectible = create_img(data, "src/resources/collectible.xpm");
 	data->floor = create_img(data, "src/resources/floor.xpm");
 	data->wall = create_img(data, "src/resources/wall.xpm");
@@ -72,4 +75,30 @@ void	load_textures(t_sys *data)
 	data->bg->addr = mlx_get_data_addr(data->bg->texture, &data->bg->bpp, \
 									&data->bg->size_line, &data->bg->endian);
 	render_background(data, data->bg);
+}
+
+int	count_textures(char *path)
+{
+	int		fd;
+	int		count;
+	char	*nbr;
+	char	*file;
+
+	count = 0;
+	nbr = ft_itoa(count);
+	file = ft_build_path(path, nbr, ".xpm");
+	fd = open(file, O_RDONLY);
+	free(file);
+	free(nbr);
+	while (fd != -1)
+	{
+		count++;
+		nbr = ft_itoa(count);
+		file = ft_build_path(path, nbr, ".xpm");
+		close(fd);
+		fd = open(file, O_RDONLY);
+		free(file);
+		free(nbr);
+	}
+	return (count);
 }
