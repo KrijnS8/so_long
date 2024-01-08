@@ -6,14 +6,14 @@
 #    By: kschelvi <kschelvi@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/11/01 13:23:25 by kschelvi      #+#    #+#                  #
-#    Updated: 2023/11/17 17:10:40 by kschelvi      ########   odam.nl          #
+#    Updated: 2023/11/20 16:28:58 by kschelvi      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 NAME_BONUS = so_long_bonus
 
-CFLAGS=-I./src_bonus/include
+CFLAGS= -Wall -Werror -Wextra -g
 MLXFLAGS = -Lminilibx-linux -lmlx_Linux -lXext -lX11
 VALGRIND_FLAGS = --leak-check=full
 
@@ -109,8 +109,11 @@ name:
 	@echo "                                              ░░██████ ";
 	@echo "                                               ░░░░░░  ";
 
-valgrind: all
+valgrind: re
 	@valgrind $(VALGRIND_FLAGS) $(NAME) map.ber
+
+bonusvalgrind: rebonus
+	@valgrind $(VALGRIND_FLAGS) $(NAME_BONUS) map.ber
 
 run: all
 	@if [ -e "map.ber" ]; then \

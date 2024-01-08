@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 13:54:54 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/17 15:10:07 by kschelvi      ########   odam.nl         */
+/*   Updated: 2023/12/04 16:39:33 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	move_player(t_sys *data, int x, int y)
 	int		px;
 	int		py;
 
-	if (x > 0 && data->player_data->rotation == -1 || x < 0 && data->player_data->rotation == 1)
+	if ((x > 0 && data->player_data->rotation == -1) || (x < 0 && data->player_data->rotation == 1))
 	{
 		data->player_data->rotation *= -1;
 		return ;
