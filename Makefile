@@ -6,7 +6,7 @@
 #    By: kschelvi <kschelvi@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/11/01 13:23:25 by kschelvi      #+#    #+#                  #
-#    Updated: 2023/11/20 16:28:58 by kschelvi      ########   odam.nl          #
+#    Updated: 2024/01/08 15:15:51 by kschelvi      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,15 +46,13 @@ SRC_BONUS	=	src_bonus/collectible_bonus.c \
 				src_bonus/main_bonus.c \
 				src_bonus/map_utils_bonus.c \
 				src_bonus/map_bonus.c \
+				src_bonus/player_bonus.c \
 				src_bonus/render_utils_bonus.c \
 				src_bonus/render_bonus.c \
 				src_bonus/system_utils_bonus.c \
 				src_bonus/system_bonus.c \
-				src_bonus/texture_utils_2_bonus.c \
 				src_bonus/texture_utils_bonus.c \
 				src_bonus/texture_bonus.c \
-				src_bonus/animation_bonus.c \
-				src_bonus/player_bonus.c
 
 OBJ = $(SRC:%.c=%.o)
 OBJ_BONUS = $(SRC_BONUS:%.c=%.o)
