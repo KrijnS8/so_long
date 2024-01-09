@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/13 14:26:50 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/09 13:25:18 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/09 13:50:25 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	draw_collectibles(t_sys *data, t_img *buf)
 	t_collectible	*content;
 	int				size;
 
-	size = data->collectible->textures[0]->width;
 	ptr = data->map->coll_lst;
 	while (ptr != NULL)
 	{
@@ -31,6 +30,7 @@ void	draw_collectibles(t_sys *data, t_img *buf)
 		if (content->collected == 1)
 			update_anim(data->collectible, &content->anim_index, \
 							&content->last_tick);
+		size = data->collectible->textures[content->anim_index]->width;
 		put_img_to_img(buf, data->collectible->textures[content->anim_index], \
 						x * size, y * size);
 		ptr = ptr->next;
