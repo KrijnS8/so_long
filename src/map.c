@@ -6,11 +6,12 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:35:27 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 15:08:06 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/09 17:30:52 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/so_long.h"
+#include "./include/dfs.h"
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdbool.h>
@@ -90,6 +91,8 @@ static t_map	*validate_map(t_map *map)
 	if (!check_walls(map))
 		return (NULL);
 	if (!check_chars(map))
+		return (NULL);
+	if (dfs(map) <= 0)
 		return (NULL);
 	return (map);
 }

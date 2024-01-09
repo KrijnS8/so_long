@@ -6,7 +6,7 @@
 #    By: kschelvi <kschelvi@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/11/01 13:23:25 by kschelvi      #+#    #+#                  #
-#    Updated: 2024/01/08 17:42:04 by kschelvi      ########   odam.nl          #
+#    Updated: 2024/01/09 17:39:43 by kschelvi      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ YELLOW = \033[0;33m
 RESET = \033[0m
 
 SRC	=	src/collectible.c \
+		src/dfs_stack.c \
+		src/dfs.c \
 		src/error.c \
 		src/linked_list.c \
 		src/main.c \
@@ -42,6 +44,8 @@ SRC	=	src/collectible.c \
 
 SRC_BONUS	=	src_bonus/animation_bonus.c \
 				src_bonus/collectible_bonus.c \
+				src_bonus/dfs_bonus.c \
+				src_bonus/dfs_stack_bonus.c \
 				src_bonus/error_bonus.c \
 				src_bonus/linked_list_bonus.c \
 				src_bonus/main_bonus.c \
