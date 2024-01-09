@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/08 14:59:46 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/08 17:52:05 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/09 13:10:01 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	draw_player(t_sys *data, t_img *buf)
 	int		y;
 	int		size;
 
-	update_anim(data->player, &data->player_data->anim_index);
+	update_anim(data->player, \
+				&data->player_data->anim_index, &data->player_data->last_tick);
 	if (data->player_data->reverse == 0)
 		img = data->player->textures[data->player_data->anim_index];
 	else
@@ -39,6 +40,7 @@ void	init_player(t_sys *data)
 	data->player_data->y = data->map->start_index / data->map->line_len;
 	data->player_data->step_count = 0;
 	data->player_data->anim_index = 0;
+	data->player_data->last_tick = 0;
 	data->player_data->reverse = 0;
 }
 
@@ -85,7 +87,7 @@ void	load_player(t_sys *data)
 	data->player = (t_anim *)malloc(sizeof(t_anim));
 	if (!data->player)
 		system_error(data, ERR_IMG_TEXTURE_FAILURE);
-	data->player->length = count_textures("./src_bonus/resources/player/idle/");
+	data->player->length = count_textures(P_TEXTURE_PATH);
 	data->player->textures = \
 		(t_img **)malloc(data->player->length * sizeof(t_img *));
 	if (!data->player->textures)
@@ -94,12 +96,12 @@ void	load_player(t_sys *data)
 	while (i < data->player->length)
 	{
 		nbr = ft_itoa(i);
-		path = ft_build_path("src_bonus/resources/player/idle/", nbr, ".xpm");
+		path = ft_build_path(P_TEXTURE_PATH, nbr, ".xpm");
 		free(nbr);
 		data->player->textures[i] = create_img(data, path);
 		free(path);
 		i++;
 	}
-	data->player->last_tick = 0;
+	data->player->loop = 1;
 	load_player_rev(data);
 }

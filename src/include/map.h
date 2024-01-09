@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:37:10 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 15:09:43 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/09 13:21:56 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 # define START 'P'
 # define CHARSET "01CEP"
 
-typedef struct s_map {
+typedef struct s_map
+{
 	char	*map;
 	size_t	map_len;
 	size_t	line_len;

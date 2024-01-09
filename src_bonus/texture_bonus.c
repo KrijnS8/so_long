@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/08 17:29:18 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/08 17:36:17 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/09 12:56:22 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	destroy_textures(t_sys *data)
 {
 	destroy_anim(data, data->player);
 	destroy_anim(data, data->player_rev);
-	free_img(data, data->collectible);
+	destroy_anim(data, data->collectible);
 	free_img(data, data->floor);
 	free_img(data, data->wall);
 	free_img(data, data->exit);
@@ -58,7 +58,7 @@ void	destroy_textures(t_sys *data)
 void	load_textures(t_sys *data)
 {
 	load_player(data);
-	data->collectible = create_img(data, "src/resources/collectible.xpm");
+	load_collectible(data);
 	data->floor = create_img(data, "src/resources/floor.xpm");
 	data->wall = create_img(data, "src/resources/wall.xpm");
 	data->exit = create_img(data, "src/resources/exit.xpm");

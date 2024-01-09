@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/08 16:07:09 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/08 17:57:57 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/09 13:15:31 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,18 @@ void	destroy_anim(t_sys *data, t_anim *anim)
 	free(anim);
 }
 
-void	update_anim(t_anim *anim, int *index)
+void	update_anim(t_anim *anim, int *index, double *last_tick)
 {
 	struct timespec	tv;
 	double			current_time;
 
+	if (*index == anim->length - 1 && anim->loop == 0)
+		return ;
 	clock_gettime(CLOCK_MONOTONIC, &tv);
 	current_time = (double)tv.tv_sec + (double)tv.tv_nsec / 1000000000;
-	if (current_time - anim->last_tick < ANIMATION_RATE)
+	if (current_time - *last_tick < ANIMATION_RATE)
 		return ;
-	anim->last_tick = current_time;
+	*last_tick = current_time;
 	if (++(*index) == anim->length)
 		*index = 0;
 }

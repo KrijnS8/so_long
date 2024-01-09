@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/08 17:38:40 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/08 17:58:46 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/09 13:17:59 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,21 @@ void	check_collision(t_sys *data)
 	int		y;
 
 	node = is_on_collectible(data);
-	if (node != NULL)
+	if (node != NULL && ((t_collectible *)(node->content))->collected == 0)
 	{
-		lst_del_node(&data->map->coll_lst, node, free_collectible);
+		((t_collectible *)(node->content))->collected = 1;
 		data->map->coll_count--;
 	}
 	x = data->player_data->x;
 	y = data->player_data->y;
 	if (data->map->map[y * data->map->line_len + x] == EXIT)
 	{
-		if (data->map->coll_lst == NULL)
+		if (data->map->coll_count == 0)
+		{
+			ft_printf("%sSuccess in %d steps%s\n", GREEN, \
+						data->player_data->step_count, RESET);
 			destroy_system(data);
+		}
 	}
 }
 
