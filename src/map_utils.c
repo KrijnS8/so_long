@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 14:32:31 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 15:08:04 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/12 16:00:12 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,18 @@ bool	check_special_chars(t_map *map, size_t index)
 	}
 	return (true);
 }
+
+void	free_map(t_map *map)
+{
+	if (map != NULL)
+	{
+		if (map->map != NULL)
+			free(map->map);
+		lstclear(&map->coll_lst, free_collectible);
+		free(map);
+	}
+}
+
 
 /* void	print_map(t_map *map)
 {

@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:35:27 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/12 12:46:24 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/12 16:23:46 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,15 +102,23 @@ static t_map	*validate_map(t_map *map)
 t_map	*parse_map(char *path)
 {
 	t_map	*new_map;
+	char	*ptr;
 
+	ptr = path;
+	while (*ptr != '\0')
+	{
+    	if (*ptr == '.' && ft_strcmp(ptr, ".ber") != 0)
+        	return (NULL);
+    	ptr++;
+	}
 	new_map = (t_map *) malloc(sizeof(t_map));
 	if (new_map == NULL)
 		return (NULL);
 	if (init_map(new_map) == NULL)
-		return (free(new_map), NULL);
+		return (free_map(new_map), NULL);
 	if (generate_map(path, new_map) == NULL)
-		return (free(new_map->map), free(new_map), NULL);
+		return (free_map(new_map), NULL);
 	if (validate_map(new_map) == NULL)
-		return (free(new_map->map), free(new_map), NULL);
+		return (free_map(new_map), NULL);
 	return (new_map);
 }

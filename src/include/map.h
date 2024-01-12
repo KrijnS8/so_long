@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:37:10 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/09 13:21:56 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/12 15:59:17 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ extern char		*put_and_remove(char **dst, char *src);
 extern int		chrset(char c, const char *set);
 extern void		print_map(t_map *map);
 extern bool		check_special_chars(t_map *map, size_t index);
+extern void		free_map(t_map *map);
 
 #endif
