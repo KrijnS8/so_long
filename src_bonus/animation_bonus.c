@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/08 16:07:09 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/09 13:15:31 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/12 13:42:03 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,31 @@ void	update_anim(t_anim *anim, int *index, double *last_tick)
 	*last_tick = current_time;
 	if (++(*index) == anim->length)
 		*index = 0;
+}
+
+void	load_anim(t_sys *data, t_anim **anim, char *path, int loop)
+{
+	char	*img_path;
+	char	*nbr;
+	int		i;
+
+	*anim = (t_anim *)malloc(sizeof(t_anim));
+	if (!*anim)
+		system_error(data, ERR_IMG_TEXTURE_FAILURE);
+	(*anim)->length = count_textures(path);
+	(*anim)->textures = \
+		(t_img **)malloc((*anim)->length * sizeof(t_img *));
+	if (!(*anim)->textures)
+		system_error(data, ERR_SYS_MALLOC_FAILURE);
+	i = 0;
+	while (i < (*anim)->length)
+	{
+		nbr = ft_itoa(i);
+		img_path = ft_build_path(path, nbr, ".xpm");
+		free(nbr);
+		(*anim)->textures[i] = create_img(data, img_path);
+		free(img_path);
+		i++;
+	}
+	(*anim)->loop = loop;
 }

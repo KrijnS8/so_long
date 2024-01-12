@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/08 14:59:46 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/09 13:10:01 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/12 14:06:17 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	draw_player(t_sys *data, t_img *buf)
 		img = data->player_rev->textures[data->player_data->anim_index];
 	x = data->player_data->x;
 	y = data->player_data->y;
-	size = data->player->textures[0]->width;
+	size = data->player->textures[data->player_data->anim_index]->width;
 	put_img_to_img(buf, img, x * size, (y - 0.5) * size);
 }
 
@@ -80,28 +80,6 @@ void	move_player(t_sys *data, int x, int y)
 
 void	load_player(t_sys *data)
 {
-	char	*path;
-	char	*nbr;
-	int		i;
-
-	data->player = (t_anim *)malloc(sizeof(t_anim));
-	if (!data->player)
-		system_error(data, ERR_IMG_TEXTURE_FAILURE);
-	data->player->length = count_textures(P_TEXTURE_PATH);
-	data->player->textures = \
-		(t_img **)malloc(data->player->length * sizeof(t_img *));
-	if (!data->player->textures)
-		system_error(data, ERR_SYS_MALLOC_FAILURE);
-	i = 0;
-	while (i < data->player->length)
-	{
-		nbr = ft_itoa(i);
-		path = ft_build_path(P_TEXTURE_PATH, nbr, ".xpm");
-		free(nbr);
-		data->player->textures[i] = create_img(data, path);
-		free(path);
-		i++;
-	}
-	data->player->loop = 1;
+	load_anim(data, &data->player, P_TEXTURE_PATH, 1);
 	load_player_rev(data);
 }

@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/08 14:56:06 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/09 12:37:52 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/12 13:41:27 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ typedef struct s_anim
 
 void	destroy_anim(t_sys *data, t_anim *anim);
 void	update_anim(t_anim *anim, int *index, double *last_tick);
+void	load_anim(t_sys *data, t_anim **anim, char *path, int loop);
 
 #endif

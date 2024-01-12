@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/13 14:26:50 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/09 13:50:25 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/12 13:41:32 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,27 +78,5 @@ void	free_collectible(void *ptr)
 
 void	load_collectible(t_sys *data)
 {
-	char	*path;
-	char	*nbr;
-	int		i;
-
-	data->collectible = (t_anim *)malloc(sizeof(t_anim));
-	if (!data->collectible)
-		system_error(data, ERR_IMG_TEXTURE_FAILURE);
-	data->collectible->length = count_textures(C_TEXTURE_PATH);
-	data->collectible->textures = \
-		(t_img **)malloc(data->collectible->length * sizeof(t_img *));
-	if (!data->collectible->textures)
-		system_error(data, ERR_SYS_MALLOC_FAILURE);
-	i = 0;
-	while (i < data->collectible->length)
-	{
-		nbr = ft_itoa(i);
-		path = ft_build_path(C_TEXTURE_PATH, nbr, ".xpm");
-		free(nbr);
-		data->collectible->textures[i] = create_img(data, path);
-		free(path);
-		i++;
-	}
-	data->collectible->loop = 0;
+	load_anim(data, &data->collectible, C_TEXTURE_PATH, 0);
 }
