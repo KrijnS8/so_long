@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 13:35:27 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/12 16:23:46 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/12 16:32:21 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,9 @@ t_map	*parse_map(char *path)
 	ptr = path;
 	while (*ptr != '\0')
 	{
-    	if (*ptr == '.' && ft_strcmp(ptr, ".ber") != 0)
-        	return (NULL);
-    	ptr++;
+		if (*ptr == '.' && ft_strcmp(ptr, ".ber") != 0)
+			return (NULL);
+		ptr++;
 	}
 	new_map = (t_map *) malloc(sizeof(t_map));
 	if (new_map == NULL)
