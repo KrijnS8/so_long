@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/01 14:32:31 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/12 14:04:57 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/12 15:16:13 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_map	*init_map(t_map *map)
 	map->start_index = -1;
 	map->coll_lst = NULL;
 	map->coll_count = 0;
+	map->foe_lst = NULL;
 	return (map);
 }
 
@@ -71,7 +72,24 @@ bool	check_special_chars(t_map *map, size_t index)
 			lst_new(new_collectible(index % map->line_len, \
 									index / map->line_len)));
 	}
+	if (map->map[index] == FOE)
+	{
+		lst_add_back(&map->foe_lst, lst_new(new_foe(index % map->line_len, \
+						index / map->line_len)));
+	}
 	return (true);
+}
+
+void	free_map(t_map *map)
+{
+	if (map != NULL)
+	{
+		if (map->map != NULL)
+			free(map->map);
+		lstclear(&map->coll_lst, free_collectible);
+		lstclear(&map->foe_lst, free_foe);
+		free(map);
+	}
 }
 
 /* void	print_map(t_map *map)

@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 14:16:11 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/12 12:25:48 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/12 15:08:29 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	init_system(t_sys	*data)
 	data->player_data = NULL;
 	data->map = NULL;
 	data->player = NULL;
+	data->player_rev = NULL;
 	data->collectible = NULL;
+	data->foe = NULL;
 	data->floor = NULL;
 	data->wall = NULL;
 	data->exit = NULL;
@@ -40,13 +42,7 @@ int	destroy_system(t_sys *data)
 		mlx_destroy_display(data->mlx_ptr);
 		free(data->mlx_ptr);
 	}
-	if (data->map != NULL)
-	{
-		if (data->map->map != NULL)
-			free(data->map->map);
-		lstclear(&data->map->coll_lst, free_collectible);
-		free(data->map);
-	}
+	free_map(data->map);
 	if (data->player_data != NULL)
 		free(data->player_data);
 	free(data);

@@ -6,7 +6,7 @@
 #    By: kschelvi <kschelvi@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/11/01 13:23:25 by kschelvi      #+#    #+#                  #
-#    Updated: 2024/01/09 17:39:43 by kschelvi      ########   odam.nl          #
+#    Updated: 2024/01/12 14:24:52 by kschelvi      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC_BONUS	=	src_bonus/animation_bonus.c \
 				src_bonus/dfs_bonus.c \
 				src_bonus/dfs_stack_bonus.c \
 				src_bonus/error_bonus.c \
+				src_bonus/foe_bonus.c \
 				src_bonus/linked_list_bonus.c \
 				src_bonus/main_bonus.c \
 				src_bonus/map_utils_bonus.c \

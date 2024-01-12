@@ -6,17 +6,25 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/08 17:38:40 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/09 13:17:59 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/12 15:14:50 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/so_long_bonus.h"
 
+int	is_on_exit(t_sys *data)
+{
+	int	x;
+	int	y;
+
+	x = data->player_data->x;
+	y = data->player_data->y;
+	return (data->map->map[y * data->map->line_len + x] == EXIT);
+}
+
 void	check_collision(t_sys *data)
 {
 	t_lst	*node;
-	int		x;
-	int		y;
 
 	node = is_on_collectible(data);
 	if (node != NULL && ((t_collectible *)(node->content))->collected == 0)
@@ -24,9 +32,12 @@ void	check_collision(t_sys *data)
 		((t_collectible *)(node->content))->collected = 1;
 		data->map->coll_count--;
 	}
-	x = data->player_data->x;
-	y = data->player_data->y;
-	if (data->map->map[y * data->map->line_len + x] == EXIT)
+	if (is_on_foe(data))
+	{
+		ft_printf("%sYou Lose!%s\n", RED, RESET);
+		destroy_system(data);
+	}
+	if (is_on_exit(data))
 	{
 		if (data->map->coll_count == 0)
 		{

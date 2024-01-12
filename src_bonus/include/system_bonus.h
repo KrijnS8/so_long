@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/07 13:59:25 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/09 12:55:29 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/12 14:21:43 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_sys
 	t_anim		*player;
 	t_anim		*player_rev;
 	t_anim		*collectible;
+	t_anim		*foe;
 	t_img		*wall;
 	t_img		*floor;
 	t_img		*exit;

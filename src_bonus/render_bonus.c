@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/08 16:39:49 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/12 12:45:40 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/12 15:19:17 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	draw_background(t_sys *data, t_img *buf)
 	put_img_to_img(buf, data->bg, 0, 0);
 }
 
-// TODO: animation struct in linked list that updates every frame
 int	handle_render(t_sys *data)
 {
 	t_img	*buf;
@@ -53,6 +52,7 @@ int	handle_render(t_sys *data)
 	buf = data->frame_buf;
 	draw_background(data, buf);
 	draw_collectibles(data, buf);
+	draw_foe(data, buf);
 	draw_player(data, buf);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, buf->texture, 0, 0);
 	return (1);

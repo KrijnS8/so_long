@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/14 13:07:21 by kschelvi      #+#    #+#                 */
-/*   Updated: 2024/01/09 12:41:17 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/12 14:19:53 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "animation_bonus.h"
 # include "collectible_bonus.h"
 # include "error_bonus.h"
+# include "foe_bonus.h"
 # include "linked_list_bonus.h"
 # include "map_bonus.h"
 # include "player_bonus.h"
