@@ -6,7 +6,7 @@
 /*   By: kschelvi <kschelvi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/06 16:22:07 by kschelvi      #+#    #+#                 */
-/*   Updated: 2023/11/14 15:07:57 by kschelvi      ########   odam.nl         */
+/*   Updated: 2024/01/12 15:43:53 by kschelvi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 const char	*g_error_map[] = {
 [ERR_MAP_INNIT_FAILURE] = "An error occured while allocating memory",
-[ERR_MAP_GENERATE_FAILURE] = "An error occured while reading the .ber file!",
+[ERR_MAP_GENERATE_FAILURE] = "Please enter a valid .ber file!",
 [ERR_MAP_VALIDATE_FAILURE] = "An error occured while validating the .ber file!",
 [ERR_SYS_MALLOC_FAILURE] = "Malloc error",
 [ERR_IMG_TEXTURE_FAILURE] = "Failed to load texture"
